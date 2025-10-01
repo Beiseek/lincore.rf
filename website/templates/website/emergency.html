@@ -1,0 +1,413 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Аварийная служба - Инженерно-сервисная компания{% endblock %}
+
+{% block content %}
+<div class="modern-service-page">
+    <!-- Modern Hero Section -->
+    <section class="modern-hero-section">
+        <div class="hero-gradient"></div>
+        <div class="hero-particles"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                    <span class="badge-icon">🚨</span>
+                    <span>Круглосуточная служба 24/7</span>
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-main">Аварийная служба</span>
+                </h1>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Круглосуточный оперативный ремонт и устранение аварийных ситуаций. Работаем 24/7 без выходных
+                </p>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="30">0</div>
+                        <div class="stat-label">минут выезд</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">часа в сутки</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="365">0</div>
+                        <div class="stat-label">дней в году</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                    <button class="btn-modern btn-primary" onclick="openApplicationModal()">
+                        <span class="btn-text">Вызвать аварийную службу</span>
+                        <span class="btn-icon">🚨</span>
+                    </button>
+                    <a href="tel:{{ contact_info.phone_main }}" class="btn-modern btn-secondary">
+                        <span class="btn-text">Позвонить сейчас</span>
+                        <span class="btn-icon">📞</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Прокрутите вниз</span>
+        </div>
+    </section>
+
+    <!-- Navigation Pills -->
+    <section class="nav-pills-section">
+        <div class="container">
+            <div class="nav-pills" data-aos="fade-up">
+                <button class="pill-btn active" data-target="intro-section">
+                    <span class="pill-icon">ℹ️</span>
+                    <span>О службе</span>
+                </button>
+                <button class="pill-btn" data-target="services-section">
+                    <span class="pill-icon">🔧</span>
+                    <span>Виды работ</span>
+                </button>
+                <button class="pill-btn" data-target="process-section">
+                    <span class="pill-icon">⏱</span>
+                    <span>Как мы работаем</span>
+                </button>
+                <button class="pill-btn" data-target="team-section">
+                    <span class="pill-icon">👨‍🔧</span>
+                    <span>Команда</span>
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section" id="intro-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-pulse">💡</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Почему стоит вызвать именно нашу аварийную службу?</h2>
+                <p class="section-subtitle">Оперативность — бригады дежурят круглосуточно</p>
+            </div>
+            
+            <div class="intro-content" data-aos="fade-up" data-aos-delay="200">
+                <p class="intro-text">
+                    Любая авария — это простой, убытки и стресс. Наша аварийная служба готова в любое время суток приехать на ваш объект для оперативного устранения неисправностей. Мы имеем всё необходимое оборудование, штат опытных специалистов и большой парк машин для быстрого реагирования.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-tools">🔧</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Основные виды аварийных работ</h2>
+                <p class="section-subtitle">Полный спектр экстренных услуг для вашего объекта</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <span class="icon-emoji animate-water">🔧</span>
+                        </div>
+                        <h3 class="card-title">Сантехника и системы водоснабжения</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Сварка труб при протечках (полипропилен, металлопластик, сталь)</li>
+                            <li>Установка ремонтных хомутов для временной или постоянной герметизации</li>
+                            <li>Ликвидация потопов, откачка воды, осушение помещений</li>
+                            <li>Устранение засоров, прорывов канализации</li>
+                            <li>Замена поврежденных участков трубопроводов</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <span class="icon-emoji animate-fire">🔥</span>
+                        </div>
+                        <h3 class="card-title">Системы отопления</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Локализация и устранение протечек в системе отопления</li>
+                            <li>Перекрытие стояков и отопительных контуров для остановки потока</li>
+                            <li>Спуск воздуха, замена воздухоотводчиков</li>
+                            <li>Ремонт или замена радиаторов, клапанов, насосов</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <span class="icon-emoji animate-lightning">⚡</span>
+                        </div>
+                        <h3 class="card-title">Электроснабжение</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Срочное восстановление электропитания</li>
+                            <li>Замена автоматических выключателей, УЗО</li>
+                            <li>Ремонт электропроводки, устранение коротких замыканий</li>
+                            <li>Временное подключение электропитания</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <span class="icon-emoji animate-wind">🌬️</span>
+                        </div>
+                        <h3 class="card-title">Вентиляция и кондиционирование</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Срочный запуск и ремонт вентиляционных систем</li>
+                            <li>Устранение задымлений, обеспечение воздухообмена</li>
+                            <li>Ремонт приточной вентиляции, очистка засоров</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card large-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <span class="icon-emoji animate-ambulance">🚑</span>
+                        </div>
+                        <h3 class="card-title">Наш автопарк и оснащение</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Экстренные выездные бригады — инженеры, сантехники, электрики</li>
+                            <li>Спецавтомобили с полным комплектом оборудования и материалов</li>
+                            <li>Генераторы для автономного энергоснабжения на время работ</li>
+                            <li>Профессиональные осушители, дренажные насосы для ликвидации потопов</li>
+                            <li>Сварочные аппараты для всех видов труб</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-team">👨‍🔧</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Команда специалистов аварийной службы</h2>
+                <p class="section-subtitle">Профессионалы, готовые к выезду в любое время</p>
+            </div>
+            
+            <div class="team-gallery" data-aos="fade-up" data-aos-delay="200">
+                {% if photos.emergency_photo_1 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.emergency_photo_1.image.url }}" alt="{{ photos.emergency_photo_1.alt_text|default:'Специалист аварийной службы 1' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if photos.emergency_photo_2 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.emergency_photo_2.image.url }}" alt="{{ photos.emergency_photo_2.alt_text|default:'Специалист аварийной службы 2' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-clock">⏱</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Как мы работаем при аварии?</h2>
+                <p class="section-subtitle">Четкий алгоритм действий для быстрого решения проблем</p>
+            </div>
+            
+            <div class="process-timeline" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-icon">
+                        <span class="icon animate-phone">📞</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Горячая линия</h4>
+                        <p>Вы звоните на горячую линию — круглосуточно</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-icon">
+                        <span class="icon animate-car">🚗</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Быстрый выезд</h4>
+                        <p>Выезд бригады в течение 30–60 минут</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-icon">
+                        <span class="icon animate-search">🔍</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Диагностика</h4>
+                        <p>Быстрая диагностика и оценка масштабов аварии</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-icon">
+                        <span class="icon animate-repair">🔧</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Качественный ремонт</h4>
+                        <p>Качественный ремонт или замена оборудования</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-icon">
+                        <span class="icon animate-clean">🧹</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Уборка</h4>
+                        <p>Уборка, осушение, приведение помещения в порядок</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="600">
+                    <div class="timeline-icon">
+                        <span class="icon animate-check">✅</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Гарантия</h4>
+                        <p>Гарантия на выполненные работы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section-modern">
+        <div class="cta-gradient"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <div class="cta-icon">
+                    <span class="emergency-icon">🚨</span>
+                </div>
+                <h3 class="cta-title">Срочно нужна аварийная помощь?</h3>
+                <p class="cta-description">
+                    Не ждите — звоните прямо сейчас! Наша аварийная бригада готова выехать на ваш объект в любое время суток.
+                </p>
+                <div class="cta-buttons" data-aos="fade-up" data-aos-delay="200">
+                    <button class="btn-cta-primary" onclick="openApplicationModal()">
+                        <span class="btn-text">Вызвать аварийную службу</span>
+                        <span class="btn-icon">🚨</span>
+                    </button>
+                    <a href="tel:{{ contact_info.phone_main }}" class="btn-cta-secondary">
+                        <span class="btn-text">Позвонить сейчас</span>
+                        <span class="btn-icon">📞</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Application Modal -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Вызвать аварийную службу</h3>
+            <span class="close" onclick="closeApplicationModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form class="modal-form" id="applicationForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Телефон" required>
+                </div>
+                <input type="hidden" name="service_type" value="emergency_service">
+                <button type="submit" class="btn-submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Callback Modal -->
+<div id="callbackModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Заказать звонок</h3>
+            <span class="close" onclick="closeCallbackModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form class="modal-form" id="callbackForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Телефон" required>
+                </div>
+                <input type="hidden" name="service_type" value="emergency_service">
+                <button type="submit" class="btn-submit">Заказать звонок</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{% include 'website/partials/emergency_styles.html' %}
+{% endblock %}
+
+{% block extra_js %}
+{% include 'website/partials/emergency_scripts.html' %}
+{% endblock %}

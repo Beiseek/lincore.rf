@@ -1,0 +1,601 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+    }
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero-particles, .hero-gradient');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // Counter animation for hero stats
+    function animateCounters() {
+        const counters = document.querySelectorAll('[data-count]');
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.count);
+            const duration = 2000;
+            
+            animateNumber(counter, 0, target, duration);
+        });
+    }
+    
+    // Number animation function
+    function animateNumber(element, start, end, duration) {
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const current = Math.floor(start + (end - start) * progress);
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+    
+    // Start counter animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                observer.disconnect();
+            }
+        });
+    });
+    
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+
+    // Navigation Pills functionality
+    const pills = document.querySelectorAll('.pill-btn');
+    const progressFill = document.querySelector('.progress-fill');
+    
+    function updateProgress(activeIndex) {
+        const progress = ((activeIndex + 1) / pills.length) * 100;
+        if (progressFill) {
+            progressFill.style.width = `${progress}%`;
+        }
+    }
+    
+    pills.forEach((pill, index) => {
+        pill.addEventListener('click', function() {
+            // Remove active class from all pills
+            pills.forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked pill
+            this.classList.add('active');
+            
+            // Update progress bar
+            updateProgress(index);
+            
+            // Smooth scroll to target section
+            const target = this.dataset.target;
+            const targetElement = document.getElementById(target);
+            
+            if (targetElement) {
+                const offset = 100;
+                const elementPosition = targetElement.offsetTop;
+                const offsetPosition = elementPosition - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Auto-update navigation pills based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    
+    function updateActiveSection() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        pills.forEach((pill, index) => {
+            pill.classList.remove('active');
+            if (pill.dataset.target === current) {
+                pill.classList.add('active');
+                updateProgress(index);
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', updateActiveSection);
+
+    // Icon animations on hover
+    const iconElements = document.querySelectorAll('.icon-emoji');
+    
+    iconElements.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            // Pause CSS animation and apply hover effect
+            this.style.animationPlayState = 'paused';
+            this.style.transform = 'scale(1.3) rotate(15deg)';
+            this.style.filter = 'brightness(1.3) drop-shadow(0 0 15px rgba(139, 92, 246, 0.5))';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            // Resume CSS animation
+            this.style.animationPlayState = 'running';
+            this.style.transform = '';
+            this.style.filter = '';
+        });
+    });
+
+    // Service card hover effects
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Add special effects to icon
+            const icon = this.querySelector('.icon-emoji');
+            if (icon) {
+                icon.style.animation = 'none';
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+                icon.style.filter = 'brightness(1.2) drop-shadow(0 0 10px rgba(139, 92, 246, 0.4))';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            // Restore original animation
+            const icon = this.querySelector('.icon-emoji');
+            if (icon) {
+                icon.style.animation = '';
+                icon.style.transform = '';
+                icon.style.filter = '';
+            }
+        });
+    });
+
+    // Timeline animations
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.3
+    });
+    
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(50px)';
+        item.style.transition = 'all 0.6s ease';
+        timelineObserver.observe(item);
+    });
+
+    // Advantage cards hover effects
+    const advantageCards = document.querySelectorAll('.advantage-card');
+    
+    advantageCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.icon-emoji');
+            if (icon) {
+                icon.style.transform = 'scale(1.3) rotate(10deg)';
+                icon.style.filter = 'brightness(1.2) drop-shadow(0 0 15px rgba(139, 92, 246, 0.4))';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.icon-emoji');
+            if (icon) {
+                icon.style.transform = '';
+                icon.style.filter = '';
+            }
+        });
+    });
+
+    // Cooperation steps animations
+    const cooperationSteps = document.querySelectorAll('.cooperation-step');
+    
+    cooperationSteps.forEach((step, index) => {
+        step.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(10px) scale(1.02)';
+            this.style.boxShadow = '0 15px 40px rgba(139, 92, 246, 0.3)';
+        });
+        
+        step.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+    });
+
+    // Modal functionality
+    window.openApplicationModal = function() {
+        const modal = document.getElementById('applicationModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    };
+    
+    window.closeApplicationModal = function() {
+        const modal = document.getElementById('applicationModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    };
+    
+    window.openCallbackModal = function() {
+        const modal = document.getElementById('callbackModal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    };
+    
+    window.closeCallbackModal = function() {
+        const modal = document.getElementById('callbackModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    };
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        const applicationModal = document.getElementById('applicationModal');
+        const callbackModal = document.getElementById('callbackModal');
+        
+        if (event.target === applicationModal) {
+            closeApplicationModal();
+        }
+        
+        if (event.target === callbackModal) {
+            closeCallbackModal();
+        }
+    });
+
+    // Form submissions
+    const applicationForm = document.getElementById('applicationForm');
+    const callbackForm = document.getElementById('callbackForm');
+    
+    if (applicationForm) {
+        applicationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Добавляем тип заявки
+            formData.append('request_type', 'application');
+            
+            fetch('/submit-request/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Заявка отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
+                    closeApplicationModal();
+                    this.reset();
+                } else {
+                    alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+            });
+        });
+    }
+    
+    if (callbackForm) {
+        callbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // Добавляем тип заявки
+            formData.append('request_type', 'callback');
+            
+            fetch('/submit-request/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Запрос на звонок отправлен! Мы перезвоним в течение 15 минут.', 'success');
+                    closeCallbackModal();
+                    this.reset();
+                } else {
+                    alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+            });
+        });
+    }
+
+    // Tool pulse effect for installation buttons
+    const installationButtons = document.querySelectorAll('.btn-cta-primary');
+    
+    installationButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.animation = 'toolPulse 0.5s ease-in-out infinite';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.animation = '';
+        });
+    });
+
+    // Special tool icon effects
+    const installationIcon = document.querySelector('.installation-icon');
+    
+    if (installationIcon) {
+        installationIcon.addEventListener('click', function() {
+            // Special tool effect on click
+            this.style.animation = 'none';
+            this.style.transform = 'scale(1.5) rotate(360deg)';
+            this.style.filter = 'brightness(2) drop-shadow(0 0 20px #8b5cf6)';
+            
+            setTimeout(() => {
+                this.style.animation = 'toolPulse 2s ease-in-out infinite';
+                this.style.transform = '';
+                this.style.filter = '';
+            }, 1000);
+        });
+    }
+
+    // Badge icon special effects
+    const badgeIcon = document.querySelector('.badge-icon');
+    
+    if (badgeIcon) {
+        badgeIcon.addEventListener('click', function() {
+            // Special tool rotation effect on click
+            this.style.animation = 'none';
+            this.style.transform = 'scale(1.5) rotate(720deg)';
+            this.style.filter = 'brightness(2) drop-shadow(0 0 20px #8b5cf6)';
+            
+            setTimeout(() => {
+                this.style.animation = 'toolRotate 3s ease-in-out infinite';
+                this.style.transform = '';
+                this.style.filter = '';
+            }, 1500);
+        });
+    }
+
+    // Section icons hover effects
+    const sectionIcons = document.querySelectorAll('.section-icon .icon');
+    
+    sectionIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2) rotate(15deg)';
+            this.style.filter = 'brightness(1.3) drop-shadow(0 0 15px rgba(139, 92, 246, 0.5))';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.filter = '';
+        });
+    });
+
+    // Add scroll-based animations for service cards
+    const serviceCardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    serviceCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        serviceCardsObserver.observe(card);
+    });
+
+    // Advantage cards scroll animations
+    const advantageCardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    advantageCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        advantageCardsObserver.observe(card);
+    });
+
+    // Smooth reveal for cooperation steps
+    const cooperationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+            }
+        });
+    }, {
+        threshold: 0.3
+    });
+    
+    cooperationSteps.forEach((step, index) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateX(-30px)';
+        step.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        cooperationObserver.observe(step);
+    });
+});
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✅' : 'ℹ️'}</span>
+            <span class="notification-text">${message}</span>
+            <span class="notification-close">&times;</span>
+        </div>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #8b5cf6, #5b21b6)'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
+        animation: slideInRight 0.5s ease-out;
+        cursor: pointer;
+        max-width: 350px;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.5s ease-out';
+            setTimeout(() => notification.remove(), 500);
+        }
+    }, 5000);
+    
+    // Remove on click
+    notification.addEventListener('click', () => {
+        notification.style.animation = 'slideOutRight 0.5s ease-out';
+        setTimeout(() => notification.remove(), 500);
+    });
+}
+
+// Add CSS for notification animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .notification .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .notification .notification-icon {
+        font-size: 20px;
+    }
+    
+    .notification .notification-close {
+        margin-left: auto;
+        font-size: 18px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    .notification .notification-close:hover {
+        opacity: 1;
+    }
+`;
+document.head.appendChild(style);
+
+// Installation-specific interactive features
+function addInstallationFeatures() {
+    // Progressive enhancement for installation imagery
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        section.addEventListener('mouseenter', function() {
+            this.style.background = this.style.background.replace('rgba(139, 92, 246, 0.05)', 'rgba(139, 92, 246, 0.1)');
+        });
+        
+        section.addEventListener('mouseleave', function() {
+            this.style.background = this.style.background.replace('rgba(139, 92, 246, 0.1)', 'rgba(139, 92, 246, 0.05)');
+        });
+    });
+    
+    // Tool sound effects (visual feedback)
+    const toolElements = document.querySelectorAll('[class*="animate-"]');
+    toolElements.forEach(tool => {
+        tool.addEventListener('click', function() {
+            // Visual "click" feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+}
+
+// Initialize installation-specific features
+addInstallationFeatures();
+</script>
+
+
+
+
+

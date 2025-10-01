@@ -1,0 +1,551 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Обслуживание систем вентиляции и кондиционирования - Инженерно-сервисная компания{% endblock %}
+
+{% block content %}
+<div class="modern-service-page">
+    <!-- Modern Hero Section -->
+    <section class="modern-hero-section">
+        <div class="hero-gradient"></div>
+        <div class="hero-particles"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                    <span class="badge-icon animated-maintenance">🌬️</span>
+                    <span>Обслуживание систем вентиляции и кондиционирования</span>
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-main">Профессиональное техническое обслуживание</span>
+                    <span class="title-accent">климатических систем</span>
+                </h1>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Комплексное обслуживание систем вентиляции и кондиционирования. Регламентные работы, сезонное обслуживание, ремонт и контрольные операции от опытных специалистов.
+                </p>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="12">0</div>
+                        <div class="stat-label">месяцев в году</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">часа поддержка</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">% качество</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                    <button class="btn-modern btn-primary" onclick="openApplicationModal()">
+                        <span class="btn-text">Оставить заявку</span>
+                        <span class="btn-icon animated-document">📋</span>
+                    </button>
+                    <button class="btn-modern btn-secondary" onclick="openCallbackModal()">
+                        <span class="btn-text">Заказать звонок специалиста</span>
+                        <span class="btn-icon animated-phone">📞</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Прокрутите вниз</span>
+        </div>
+    </section>
+
+    <!-- Navigation Pills -->
+    <section class="nav-pills-section">
+        <div class="container">
+            <div class="nav-pills" data-aos="fade-up">
+                <a href="#services" class="pill-btn active">
+                    <span class="pill-icon">🔧</span>
+                    <span>Регламентные работы</span>
+                </a>
+                <a href="#repair" class="pill-btn">
+                    <span class="pill-icon">⚡</span>
+                    <span>Ремонт</span>
+                </a>
+                <a href="#control" class="pill-btn">
+                    <span class="pill-icon">📊</span>
+                    <span>Контроль</span>
+                </a>
+                <a href="#advantages" class="pill-btn">
+                    <span class="pill-icon">✅</span>
+                    <span>Преимущества</span>
+                </a>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mega Services Grid Section -->
+    <section class="services-grid-section" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="icon-wrapper">
+                    <span class="icon animated-maintenance">🔧</span>
+                </div>
+                <h2 class="section-title">Регламентные и сезонные работы</h2>
+                <p class="section-subtitle">Полный спектр работ для поддержания климатических систем</p>
+            </div>
+            <div class="mega-services-grid">
+                <!-- Ежемесячное обслуживание -->
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-service-header">
+                        <div class="mega-icon-container">
+                            <span class="mega-service-icon animated-maintenance">📅</span>
+                            <div class="icon-glow-effect"></div>
+                        </div>
+                        <div class="mega-header-content">
+                            <h3>Ежемесячное обслуживание</h3>
+                            <div class="service-frequency">12 раз в год</div>
+                        </div>
+                    </div>
+                    <div class="mega-service-features">
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">👀</span>
+                            <span>Внешний осмотр систем и оборудования</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🌡️</span>
+                            <span>Контроль параметров воздуха (температура, давление)</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">⚡</span>
+                            <span>Проверка электрических соединений</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🧹</span>
+                            <span>Чистка фильтров и воздухораспределительных решеток</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">💧</span>
+                            <span>Проверка дренажной системы</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ежеквартальное обслуживание -->
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-service-header">
+                        <div class="mega-icon-container">
+                            <span class="mega-service-icon animated-season">🔄</span>
+                            <div class="icon-glow-effect"></div>
+                        </div>
+                        <div class="mega-header-content">
+                            <h3>Ежеквартальное обслуживание</h3>
+                            <div class="service-frequency">4 раза в год</div>
+                        </div>
+                    </div>
+                    <div class="mega-service-features">
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🔗</span>
+                            <span>Проверка и натяжение ременных передач</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">⚙️</span>
+                            <span>Контроль состояния подшипников и смазка</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🔍</span>
+                            <span>Проверка теплообменников на герметичность</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🧽</span>
+                            <span>Чистка теплообменников и камер вентиляционных установок</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Подготовка к летнему сезону -->
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-service-header">
+                        <div class="mega-icon-container">
+                            <span class="mega-service-icon animated-season">☀️</span>
+                            <div class="icon-glow-effect"></div>
+                        </div>
+                        <div class="mega-header-content">
+                            <h3>Подготовка к летнему сезону</h3>
+                            <div class="service-frequency">Апрель - Май</div>
+                        </div>
+                    </div>
+                    <div class="mega-service-features">
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🚿</span>
+                            <span>Промывка теплообменников</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🧊</span>
+                            <span>Чистка конденсаторов и испарителей</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">❄️</span>
+                            <span>Проверка холодильного контура</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">⚗️</span>
+                            <span>Дозаправка хладагентом</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">⚙️</span>
+                            <span>Настройка режимов работы</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Подготовка к зимнему сезону -->
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-service-header">
+                        <div class="mega-icon-container">
+                            <span class="mega-service-icon animated-season">❄️</span>
+                            <div class="icon-glow-effect"></div>
+                        </div>
+                        <div class="mega-header-content">
+                            <h3>Подготовка к зимнему сезону</h3>
+                            <div class="service-frequency">Сентябрь - Октябрь</div>
+                        </div>
+                    </div>
+                    <div class="mega-service-features">
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🔥</span>
+                            <span>Проверка калориферов и обогревателей</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🧯</span>
+                            <span>Контроль изоляции трубопроводов</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">💡</span>
+                            <span>Проверка противобактериальных ламп</span>
+                        </div>
+                        <div class="mega-feature-point">
+                            <span class="mega-feature-emoji">🎛️</span>
+                            <span>Настройка зимних режимов работы</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair & Maintenance Timeline Section -->
+    <section class="repair-timeline-section" id="repair">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="icon-wrapper">
+                    <span class="icon animated-repair">⚡</span>
+                </div>
+                <h2 class="section-title">Ремонтные работы</h2>
+                <p class="section-subtitle">Оперативное устранение неисправностей и аварийное обслуживание</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-icon animated-repair">🔧</div>
+                    <div class="timeline-content">
+                        <h3>Оперативный ремонт</h3>
+                        <ul>
+                            <li>Устранение утечек фреона</li>
+                            <li>Замена компрессоров и вентиляторов</li>
+                            <li>Ремонт электронных блоков управления</li>
+                            <li>Восстановление теплоизоляции</li>
+                            <li>Замена запорно-регулирующей арматуры</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-icon animated-emergency">🚨</div>
+                    <div class="timeline-content">
+                        <h3>Аварийное обслуживание</h3>
+                        <ul>
+                            <li>Круглосуточный выезд специалистов</li>
+                            <li>Диагностика и устранение неисправностей</li>
+                            <li>Временное восстановление работоспособности</li>
+                            <li>Замена вышедшего из строя оборудования</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Control Operations Section -->
+    <section class="control-operations-section" id="control">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="icon-wrapper">
+                    <span class="icon animated-control">📊</span>
+                </div>
+                <h2 class="section-title">Контрольные операции</h2>
+                <p class="section-subtitle">Высокотехнологичный мониторинг и испытания систем вентиляции</p>
+            </div>
+            <div class="interactive-control-grid">
+                <!-- Системный мониторинг -->
+                <div class="ultra-control-card monitoring-card" data-aos="flip-up" data-aos-delay="100">
+                    <div class="control-card-glow"></div>
+                    <div class="control-particles-bg"></div>
+                    <div class="ultra-control-header">
+                        <div class="ultra-icon-complex">
+                            <span class="ultra-control-icon animated-monitoring">📊</span>
+                            <div class="icon-orbit">
+                                <div class="orbit-dot"></div>
+                                <div class="orbit-dot"></div>
+                                <div class="orbit-dot"></div>
+                            </div>
+                        </div>
+                        <h3>Системный мониторинг</h3>
+                        <div class="control-category-badge">REAL-TIME</div>
+                    </div>
+                    <div class="ultra-control-features">
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🌡️</span>
+                            <span>Замеры давления и температуры</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">⚡</span>
+                            <span>Контроль потребляемой мощности</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🔊</span>
+                            <span>Проверка виброакустических характеристик</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🤖</span>
+                            <span>Тестирование систем автоматики</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">📝</span>
+                            <span>Ведение журналов эксплуатации</span>
+                        </div>
+                    </div>
+                    <div class="control-interactive-element">
+                        <div class="data-visualization">
+                            <div class="data-line">
+                                <div class="data-pulse"></div>
+                            </div>
+                            <div class="data-stats">
+                                <span>24/7 мониторинг</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Испытания и наладка -->
+                <div class="ultra-control-card testing-card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="control-card-glow"></div>
+                    <div class="control-particles-bg"></div>
+                    <div class="ultra-control-header">
+                        <div class="ultra-icon-complex">
+                            <span class="ultra-control-icon animated-testing">⚙️</span>
+                            <div class="icon-gear-system">
+                                <div class="gear-small"></div>
+                                <div class="gear-medium"></div>
+                                <div class="gear-large"></div>
+                            </div>
+                        </div>
+                        <h3>Испытания и наладка</h3>
+                        <div class="control-category-badge">PRECISION</div>
+                    </div>
+                    <div class="ultra-control-features">
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">💨</span>
+                            <span>Балансировка воздушных потоков</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🎛️</span>
+                            <span>Настройка автоматических регуляторов</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🛡️</span>
+                            <span>Проверка защиты и блокировок</span>
+                        </div>
+                        <div class="ultra-feature-item">
+                            <div class="feature-indicator active"></div>
+                            <span class="feature-emoji">🔬</span>
+                            <span>Испытания на различных режимах работы</span>
+                        </div>
+                    </div>
+                    <div class="control-interactive-element">
+                        <div class="testing-visualization">
+                            <div class="test-progress">
+                                <div class="progress-ring">
+                                    <div class="progress-fill-ring"></div>
+                                </div>
+                                <span class="progress-text">100%</span>
+                            </div>
+                            <div class="test-stats">
+                                <span>Точность настройки</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Grid Section -->
+    <section class="advantages-grid-section" id="advantages">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="icon-wrapper">
+                    <span class="icon animated-specialist">✅</span>
+                </div>
+                <h2 class="section-title">Наши преимущества</h2>
+                <p class="section-subtitle">Почему стоит выбрать нашу компанию для обслуживания климатических систем</p>
+            </div>
+            <div class="advantages-interactive-grid">
+                <div class="advantage-modern-card" data-aos="fade-up" data-aos-delay="100">
+                    <span class="advantage-icon-modern animated-specialist">🎯</span>
+                    <h3>Опытные специалисты с допусками</h3>
+                    <p>Квалифицированные инженеры с многолетним опытом</p>
+                </div>
+                
+                <div class="advantage-modern-card" data-aos="fade-up" data-aos-delay="200">
+                    <span class="advantage-icon-modern animated-equipment">🔧</span>
+                    <h3>Современное диагностическое оборудование</h3>
+                    <p>Новейшие приборы для точной диагностики</p>
+                </div>
+                
+                <div class="advantage-modern-card" data-aos="fade-up" data-aos-delay="300">
+                    <span class="advantage-icon-modern animated-support">⏱</span>
+                    <h3>Круглосуточная техническая поддержка</h3>
+                    <p>Поддержка и консультации 24/7</p>
+                </div>
+                
+                <div class="advantage-modern-card" data-aos="fade-up" data-aos-delay="400">
+                    <span class="advantage-icon-modern animated-guarantee">📋</span>
+                    <h3>Гарантия на все виды работ</h3>
+                    <p>Официальная гарантия на выполненные работы</p>
+                </div>
+                
+                <div class="advantage-modern-card" data-aos="fade-up" data-aos-delay="500">
+                    <span class="advantage-icon-modern animated-price">💰</span>
+                    <h3>Фиксированные цены в договоре</h3>
+                    <p>Прозрачное ценообразование без скрытых доплат</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-team">👨‍🔧</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Команда специалистов по вентиляции</h2>
+                <p class="section-subtitle">Профессионалы по обслуживанию систем вентиляции и кондиционирования</p>
+            </div>
+            
+            <div class="team-gallery" data-aos="fade-up" data-aos-delay="200">
+                {% if photos.ventilation_team_1 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.ventilation_team_1.image.url }}" alt="{{ photos.ventilation_team_1.alt_text|default:'Специалист вентиляции 1' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if photos.ventilation_team_2 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.ventilation_team_2.image.url }}" alt="{{ photos.ventilation_team_2.alt_text|default:'Специалист вентиляции 2' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if photos.ventilation_team_3 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.ventilation_team_3.image.url }}" alt="{{ photos.ventilation_team_3.alt_text|default:'Специалист вентиляции 3' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if photos.ventilation_team_4 %}
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="{{ photos.ventilation_team_4.image.url }}" alt="{{ photos.ventilation_team_4.alt_text|default:'Специалист вентиляции 4' }}" loading="lazy">
+                            <div class="photo-overlay">
+                                <div class="overlay-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section-modern">
+        <div class="cta-gradient"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <span class="cta-icon ventilation-icon animated-ventilation-pulse">🌬️</span>
+                <h2 class="cta-title">Закажите бесплатный осмотр вашей системы и получите коммерческое предложение</h2>
+                <div class="cta-buttons">
+                    <button class="btn-modern btn-primary" onclick="openApplicationModal()">
+                        <span class="btn-text">Оставить заявку</span>
+                        <span class="btn-icon animated-document">📋</span>
+                    </button>
+                    <button class="btn-modern btn-secondary" onclick="openCallbackModal()">
+                        <span class="btn-text">Заказать звонок специалиста</span>
+                        <span class="btn-icon animated-phone">📞</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include 'website/partials/application_modal.html' %}
+{% include 'website/partials/callback_modal.html' %}
+{% endblock %}
+
+{% block extra_css %}
+{% include 'website/partials/ventilation_styles.html' %}
+{% endblock %}
+
+{% block extra_js %}
+{% include 'website/partials/ventilation_scripts.html' %}
+{% endblock %}

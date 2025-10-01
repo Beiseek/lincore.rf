@@ -1,0 +1,595 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Подготовка к отопительному сезону - Инженерно-сервисная компания{% endblock %}
+
+{% block content %}
+<div class="modern-service-page">
+    <!-- Modern Hero Section -->
+    <section class="modern-hero-section heating-hero">
+        <div class="hero-gradient"></div>
+        <div class="hero-particles"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                    <span class="badge-icon animated-heating">🛠</span>
+                    <span>Комплекс технических мероприятий</span>
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-main">Подготовка к отопительному сезону</span>
+                    <span class="title-accent">Вы обращаетесь к нам и не переживаете.</span>
+                    <span class="title-guarantee">Зимой тепло будет!</span>
+                </h1>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Работаем с ситуациями любой сложности! Полный комплекс работ для готовности вашей системы отопления к зиме.
+                </p>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">% готовность к зиме</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">часа круглосуточно</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">этапов подготовки</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                    <a href="tel:{{ contact_info.phone_main }}" class="btn-modern btn-primary">
+                        <span class="btn-text">Позвонить</span>
+                        <span class="btn-icon">📞</span>
+                    </a>
+                    <button class="btn-modern btn-secondary" onclick="openQuoteModal()">
+                        <span class="btn-text">Запросить коммерческое предложение</span>
+                        <span class="btn-icon animated-document">📋</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Прокрутите вниз</span>
+        </div>
+    </section>
+
+    <!-- Navigation Pills -->
+    <section class="nav-pills-section">
+        <div class="container">
+            <div class="nav-pills" data-aos="fade-up">
+                <a href="#services" class="pill-btn active">
+                    <span class="pill-icon">🔧</span>
+                    <span>Услуги</span>
+                </a>
+                <a href="#workflow" class="pill-btn">
+                    <span class="pill-icon">📋</span>
+                    <span>Этапы работ</span>
+                </a>
+                <a href="#objects" class="pill-btn">
+                    <span class="pill-icon">📍</span>
+                    <span>Объекты</span>
+                </a>
+                <a href="#documents" class="pill-btn">
+                    <span class="pill-icon">📄</span>
+                    <span>Документация</span>
+                </a>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-grid-section" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-icon">🛠</span>
+                <h2 class="section-title">Комплекс технических мероприятий</h2>
+                <p class="section-subtitle">Полный спектр работ для подготовки к отопительному сезону</p>
+            </div>
+            <div class="heating-services-grid">
+                <!-- Гидравлические испытания -->
+                <div class="heating-service-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-header">
+                        <div class="service-icon-wrapper">
+                            <span class="service-icon animated-pressure">🔧</span>
+                        </div>
+                        <h3>Гидравлические испытания (опрессовка)</h3>
+                    </div>
+                    <div class="service-features">
+                        <div class="feature-point">
+                            <span class="feature-emoji">💪</span>
+                            <span>Испытание на прочность и плотность повышенным давлением</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">👁️</span>
+                            <span>Визуальный контроль сварных соединений, арматуры, компенсаторов и опор</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">🔍</span>
+                            <span>Выявление дефектов и негерметичности соединений</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">📋</span>
+                            <span>Составление актов испытаний по форме</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Гидропневматическая промывка -->
+                <div class="heating-service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-header">
+                        <div class="service-icon-wrapper">
+                            <span class="service-icon animated-wind">💨</span>
+                        </div>
+                        <h3>Гидропневматическая промывка систем отопления</h3>
+                    </div>
+                    <div class="service-features">
+                        <div class="feature-point">
+                            <span class="feature-emoji">🧹</span>
+                            <span>Очистка внутренних поверхностей теплообменного оборудования от механических отложений</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">⚙️</span>
+                            <span>Восстановление расчетных гидравлических характеристик системы</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">💨</span>
+                            <span>Применение компрессорного оборудования</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">🔬</span>
+                            <span>Контроль качества промывки по визуальным и химическим показателям</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Химическая промывка -->
+                <div class="heating-service-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-header">
+                        <div class="service-icon-wrapper">
+                            <span class="service-icon animated-chemistry">⚗️</span>
+                        </div>
+                        <h3>Химическая промывка теплообменного оборудования</h3>
+                    </div>
+                    <div class="service-features">
+                        <div class="feature-point">
+                            <span class="feature-emoji">🧪</span>
+                            <span>Циркуляционная промывка ингибированными растворами на основе соляной кислоты или щелочных композиций</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">💧</span>
+                            <span>Растворение и удаление накипи, коррозионных отложений и продуктов деградации теплоносителя</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">⚖️</span>
+                            <span>Контроль концентрации рабочего раствора и нейтрализация отходов промывки</span>
+                        </div>
+                        <div class="feature-point">
+                            <span class="feature-emoji">🔥</span>
+                            <span>Восстановление паспортной теплоотдачи теплообменных поверхностей</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Timeline Section -->
+    <section class="workflow-timeline-section" id="workflow">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">Технологическая последовательность работ</h2>
+                <p class="section-subtitle">Пошаговый процесс подготовки к отопительному сезону</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-number">01</div>
+                    <div class="timeline-icon animated-diagnostic">🔍</div>
+                    <div class="timeline-content">
+                        <h3>Предпусковая диагностика</h3>
+                        <ul>
+                            <li>Тепловизионное обследование</li>
+                            <li>Проверка состояния тепловых узлов</li>
+                            <li>Контроль параметров теплоносителя и рабочего давления</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-number">02</div>
+                    <div class="timeline-icon animated-preparation">🔧</div>
+                    <div class="timeline-content">
+                        <h3>Подготовительные работы</h3>
+                        <ul>
+                            <li>Отключение системы от внешних сетей</li>
+                            <li>Установка заглушек и отключение стояков</li>
+                            <li>Подключение промывочного оборудования</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-number">03</div>
+                    <div class="timeline-icon animated-execution">⚡</div>
+                    <div class="timeline-content">
+                        <h3>Исполнительные работы</h3>
+                        <ul>
+                            <li>Поэтапная промывка стояков и магистралей</li>
+                            <li>Гидравлические испытания на герметичность</li>
+                            <li>Замена дефектных элементов и уплотнений</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-number">04</div>
+                    <div class="timeline-icon animated-startup">🚀</div>
+                    <div class="timeline-content">
+                        <h3>Пусконаладочные работы</h3>
+                        <ul>
+                            <li>Заполнение системы теплоносителем</li>
+                            <li>Удаление воздушных пробок</li>
+                            <li>Балансировка гидравлических контуров</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-number">05</div>
+                    <div class="timeline-icon animated-completion">✅</div>
+                    <div class="timeline-content">
+                        <h3>Сдача в эксплуатацию</h3>
+                        <ul>
+                            <li>Испытания в рабочем режиме</li>
+                            <li>Составление исполнительной документации</li>
+                            <li>Получение актов допуска в МОЭК</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objects Grid Section -->
+    <section class="objects-grid-section" id="objects">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-icon">📍</span>
+                <h2 class="section-title">Объекты работ</h2>
+                <p class="section-subtitle">Широкий спектр объектов для подготовки к отопительному сезону</p>
+            </div>
+            <div class="objects-grid">
+                <div class="object-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="object-icon-wrapper">
+                        <span class="object-icon animated-building">🏢</span>
+                    </div>
+                    <h3>Многоквартирные жилые дома</h3>
+                    <p>Подготовка систем отопления жилых комплексов, обслуживание ИТП и тепловых узлов</p>
+                </div>
+
+                <div class="object-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="object-icon-wrapper">
+                        <span class="object-icon animated-office">🏛️</span>
+                    </div>
+                    <h3>Административные здания</h3>
+                    <p>Офисные центры и государственные учреждения, комплексное обслуживание систем отопления</p>
+                </div>
+
+                <div class="object-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="object-icon-wrapper">
+                        <span class="object-icon animated-factory">🏭</span>
+                    </div>
+                    <h3>Промышленные сооружения</h3>
+                    <p>Заводы, склады и производственные комплексы, промывка и испытание технологических систем</p>
+                </div>
+
+                <div class="object-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="object-icon-wrapper">
+                        <span class="object-icon animated-hospital">🏥</span>
+                    </div>
+                    <h3>Социальные объекты</h3>
+                    <p>Школы, больницы, детские сады со специальными требованиями к температурному режиму</p>
+                </div>
+
+                <div class="object-card" data-aos="flip-left" data-aos-delay="500">
+                    <div class="object-icon-wrapper">
+                        <span class="object-icon animated-commercial">🏪</span>
+                    </div>
+                    <h3>Коммерческая недвижимость</h3>
+                    <p>Торговые центры и коммерческие объекты, энергоэффективные решения для снижения затрат</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Gallery Section -->
+    <section class="works-gallery-modern" data-aos="fade-up" data-aos-delay="200">
+        <div class="gallery-header">
+            <h2 class="gallery-title">Фотографии с объектов</h2>
+            <p class="gallery-subtitle">Работа наших специалистов</p>
+        </div>
+        
+        <div class="interactive-gallery">
+            <div class="gallery-container">
+                <div class="gallery-slider" id="heatingGallerySlider">
+                    {% if photos.preparation_gallery_1 %}
+                        <div class="gallery-slide active">
+                            <img src="{{ photos.preparation_gallery_1.image.url }}" alt="{{ photos.preparation_gallery_1.alt_text|default:'Работа 1' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_2 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_2.image.url }}" alt="{{ photos.preparation_gallery_2.alt_text|default:'Работа 2' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_3 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_3.image.url }}" alt="{{ photos.preparation_gallery_3.alt_text|default:'Работа 3' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_4 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_4.image.url }}" alt="{{ photos.preparation_gallery_4.alt_text|default:'Работа 4' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_5 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_5.image.url }}" alt="{{ photos.preparation_gallery_5.alt_text|default:'Работа 5' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_6 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_6.image.url }}" alt="{{ photos.preparation_gallery_6.alt_text|default:'Работа 6' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_7 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_7.image.url }}" alt="{{ photos.preparation_gallery_7.alt_text|default:'Работа 7' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_8 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_8.image.url }}" alt="{{ photos.preparation_gallery_8.alt_text|default:'Работа 8' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_9 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_9.image.url }}" alt="{{ photos.preparation_gallery_9.alt_text|default:'Работа 9' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_10 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_10.image.url }}" alt="{{ photos.preparation_gallery_10.alt_text|default:'Работа 10' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_11 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_11.image.url }}" alt="{{ photos.preparation_gallery_11.alt_text|default:'Работа 11' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_12 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_12.image.url }}" alt="{{ photos.preparation_gallery_12.alt_text|default:'Работа 12' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_13 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_13.image.url }}" alt="{{ photos.preparation_gallery_13.alt_text|default:'Работа 13' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_14 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_14.image.url }}" alt="{{ photos.preparation_gallery_14.alt_text|default:'Работа 14' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.preparation_gallery_15 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.preparation_gallery_15.image.url }}" alt="{{ photos.preparation_gallery_15.alt_text|default:'Работа 15' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="gallery-navigation">
+                    <button class="gallery-nav-btn prev-btn" onclick="heatingGalleryPrev()">
+                        <span>‹</span>
+                        Назад
+                    </button>
+                    <button class="gallery-nav-btn next-btn" onclick="heatingGalleryNext()">
+                        Вперед
+                        <span>›</span>
+                    </button>
+                </div>
+                
+                <div class="gallery-dots">
+                    {% if photos.preparation_gallery_1 %}
+                        <span class="dot active" onclick="currentSlide('heatingGallerySlider', 1)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_2 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 2)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_3 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 3)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_4 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 4)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_5 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 5)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_6 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 6)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_7 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 7)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_8 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 8)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_9 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 9)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_10 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 10)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_11 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 11)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_12 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 12)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_13 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 13)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_14 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 14)"></span>
+                    {% endif %}
+                    {% if photos.preparation_gallery_15 %}
+                        <span class="dot" onclick="currentSlide('heatingGallerySlider', 15)"></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section class="documents-modern-section" id="documents">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-icon">📄</span>
+                <h2 class="section-title">Получаемая документация</h2>
+                <p class="section-subtitle">Полный комплект документов для готовности к отопительному сезону</p>
+            </div>
+            <div class="documents-interactive-grid">
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="doc-icon-modern animated-document-ready">📋</div>
+                    <h3>Акт готовности к отопительному периоду</h3>
+                    <p>Официальный документ о готовности системы</p>
+                    <div class="doc-badge official">ГОТОВНОСТЬ</div>
+                </div>
+
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="doc-icon-modern animated-hydraulic">💧</div>
+                    <h3>Акт гидравлических испытаний</h3>
+                    <p>Результаты опрессовки системы отопления</p>
+                    <div class="doc-badge testing">ИСПЫТАНИЯ</div>
+                </div>
+
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="doc-icon-modern animated-cleaning">🧹</div>
+                    <h3>Акт промывки системы отопления</h3>
+                    <p>Документация о проведенной промывке</p>
+                    <div class="doc-badge cleaning">ПРОМЫВКА</div>
+                </div>
+
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="doc-icon-modern animated-temperature">🌡️</div>
+                    <h3>Протоколы проверки параметров</h3>
+                    <p>Контроль качества теплоносителя</p>
+                    <div class="doc-badge protocol">ПРОТОКОЛЫ</div>
+                </div>
+
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="doc-icon-modern animated-scheme">📊</div>
+                    <h3>Исполнительные схемы</h3>
+                    <p>Промывки и опрессовки системы</p>
+                    <div class="doc-badge schemes">СХЕМЫ</div>
+                </div>
+
+                <div class="document-modern-card" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="doc-icon-modern animated-moek">🏢</div>
+                    <h3>Акт допуска в эксплуатацию МОЭК</h3>
+                    <p>Разрешение на эксплуатацию от МОЭК</p>
+                    <div class="doc-badge moek">МОЭК</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section-modern heating-cta">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <span class="cta-icon animated-heating-pulse">🔥</span>
+                <h2 class="cta-title">Для расчета стоимости и составления графика работ направьте техническую документацию на объект</h2>
+                <div class="cta-buttons">
+                    <button class="btn-modern btn-primary" onclick="openQuoteModal()">
+                        <span class="btn-text">Запросить коммерческое предложение</span>
+                        <span class="btn-icon animated-document">📋</span>
+                    </button>
+                </div>
+                <div class="cta-contact-info">
+                    <p>Отдел технического надзора:</p>
+                    <a href="tel:{{ contact_info.phone_main }}" class="animated-phone-call">
+                        <span class="phone-icon">📞</span>
+                        <span>Позвонить</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Modal для запроса КП -->
+<div id="quoteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Запросить КП</h3>
+            <span class="close" onclick="closeQuoteModal()">&times;</span>
+        </div>
+        <form id="quoteForm" class="modal-form" action="/submit-request/" method="POST" onsubmit="submitQuoteForm(event)">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="quoteName">ФИО *</label>
+                <input type="text" id="quoteName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="quotePhone">Телефон *</label>
+                <input type="tel" id="quotePhone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="quoteOrganization">Название организации *</label>
+                <input type="text" id="quoteOrganization" name="organization" required>
+            </div>
+            <input type="hidden" name="service_type" value="heating_preparation_service">
+            <input type="hidden" name="request_type" value="quote_request">
+            <button type="submit" class="submit-btn">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{% include 'website/partials/heating_preparation_styles.html' %}
+{% endblock %}
+
+{% block extra_js %}
+{% include 'website/partials/heating_preparation_scripts.html' %}
+{% include 'website/partials/heating_preparation_gallery_scripts.html' %}
+{% endblock %}

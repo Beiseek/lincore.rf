@@ -1,0 +1,759 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Аудит инженерных систем для госзаказчиков - Инженерно-сервисная компания{% endblock %}
+
+{% block content %}
+<div class="modern-service-page">
+    <!-- Modern Hero Section -->
+    <section class="modern-hero-section">
+        <div class="hero-gradient"></div>
+        <div class="hero-particles"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                    <span class="badge-icon">🔍</span>
+                    <span>Для госзаказчиков</span>
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-main">Аудит инженерных систем</span>
+                    <span class="title-accent">для госзаказчиков</span>
+                </h1>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Бесплатное обследование объектов и подготовка документов для закупок по 44-ФЗ и 223-ФЗ
+                </p>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="40">0</div>
+                        <div class="stat-label">% сокращение сроков</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">% соответствие 44-ФЗ</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">документов в комплекте</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                    <a href="tel:{{ contact_info.phone_main }}" class="btn-modern btn-primary">
+                        <span class="btn-text">Позвонить</span>
+                        <span class="btn-icon">📞</span>
+                    </a>
+                    <button class="btn-modern btn-secondary" onclick="requestQuote()">
+                        <span class="btn-text">Запросить КП</span>
+                        <span class="btn-icon">📋</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Прокрутите вниз</span>
+        </div>
+    </section>
+
+    <!-- Navigation Pills -->
+    <section class="nav-pills-section">
+    <div class="container">
+            <div class="nav-pills" data-aos="fade-up">
+                <button class="pill-btn active" data-target="services-section">
+                    <span class="pill-icon">🔍</span>
+                    <span>Услуги</span>
+                </button>
+                <button class="pill-btn" data-target="why-us-section">
+                    <span class="pill-icon">🛠</span>
+                    <span>Почему выбирают нас</span>
+                </button>
+                <button class="pill-btn" data-target="documents-section">
+                    <span class="pill-icon">📄</span>
+                    <span>Перечень документов</span>
+                </button>
+                <button class="pill-btn" data-target="advantages-section">
+                    <span class="pill-icon">✅</span>
+                    <span>Преимущества</span>
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-search">🔍</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Услуги</h2>
+            </div>
+            
+            <div class="services-mega-grid">
+                <div class="mega-service-card highlight-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-card-glow"></div>
+                    <div class="mega-card-content">
+                        <div class="mega-icon-wrapper">
+                            <div class="mega-icon-circle">
+                                <span class="mega-icon animate-car">🚗</span>
+                            </div>
+                            <div class="icon-particles"></div>
+                        </div>
+                        <h3>Бесплатный выезд</h3>
+                        <p>Специалистов на объект</p>
+                        <div class="card-badge free-badge">БЕСПЛАТНО</div>
+                    </div>
+                </div>
+
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-card-glow"></div>
+                    <div class="mega-card-content">
+                        <div class="mega-icon-wrapper">
+                            <div class="mega-icon-circle">
+                                <span class="mega-icon animate-clipboard">📋</span>
+                            </div>
+                            <div class="icon-particles"></div>
+                        </div>
+                        <h3>Дефектные ведомости</h3>
+                                <p>Составление документации</p>
+                        <div class="card-badge doc-badge">ДОКУМЕНТЫ</div>
+                    </div>
+                </div>
+
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-card-glow"></div>
+                    <div class="mega-card-content">
+                        <div class="mega-icon-wrapper">
+                            <div class="mega-icon-circle">
+                                <span class="mega-icon animate-money">💰</span>
+                            </div>
+                            <div class="icon-particles"></div>
+                        </div>
+                        <h3>Сметная документация</h3>
+                                <p>ФЕР, ТЕР</p>
+                        <div class="card-badge calc-badge">РАСЧЁТЫ</div>
+                    </div>
+                </div>
+
+                <div class="mega-service-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-card-glow"></div>
+                    <div class="mega-card-content">
+                        <div class="mega-icon-wrapper">
+                            <div class="mega-icon-circle">
+                                <span class="mega-icon animate-document">📝</span>
+                            </div>
+                            <div class="icon-particles"></div>
+                        </div>
+                        <h3>Технические задания</h3>
+                                <p>Разработка ТЗ</p>
+                        <div class="card-badge tech-badge">ТЗ</div>
+                    </div>
+                </div>
+
+                <div class="mega-service-card premium-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="mega-card-background"></div>
+                    <div class="mega-card-glow"></div>
+                    <div class="mega-card-content">
+                        <div class="mega-icon-wrapper">
+                            <div class="mega-icon-circle">
+                                <span class="mega-icon animate-law">⚖️</span>
+                            </div>
+                            <div class="icon-particles"></div>
+                        </div>
+                        <h3>Консультации</h3>
+                                <p>По 44-ФЗ и 223-ФЗ</p>
+                        <div class="card-badge law-badge">ЗАКОН</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us-section" id="why-us-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-tools">🛠</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Почему выбирают нас?</h2>
+                <p class="section-subtitle">Профессиональный подход к каждому проекту</p>
+            </div>
+            
+            <div class="why-us-interactive-grid">
+                <div class="interactive-why-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="why-card-front">
+                        <div class="why-icon-container">
+                            <div class="why-icon-bg">
+                                <span class="why-icon animate-wrench">🔧</span>
+                            </div>
+                            <div class="why-glow-effect"></div>
+                        </div>
+                        <h4>Комплексный подход</h4>
+                        <div class="why-hover-indicator">
+                            <span>Подробнее</span>
+                            <div class="hover-arrow">→</div>
+                        </div>
+                    </div>
+                    <div class="why-card-back">
+                        <div class="why-detail-content">
+                            <h5>Что это означает?</h5>
+                            <p>обслуживаем все инженерные системы</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-why-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="why-card-front">
+                        <div class="why-icon-container">
+                            <div class="why-icon-bg">
+                                <span class="why-icon animate-specialist">👨‍🔧</span>
+                            </div>
+                            <div class="why-glow-effect"></div>
+                        </div>
+                                <h4>Квалифицированные специалисты</h4>
+                        <div class="why-hover-indicator">
+                            <span>Подробнее</span>
+                            <div class="hover-arrow">→</div>
+                        </div>
+                    </div>
+                    <div class="why-card-back">
+                        <div class="why-detail-content">
+                            <h5>Наш опыт</h5>
+                                <p>с опытом работы более 5 лет</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-why-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="why-card-front">
+                        <div class="why-icon-container">
+                            <div class="why-icon-bg">
+                                <span class="why-icon animate-clock">⏰</span>
+                            </div>
+                            <div class="why-glow-effect"></div>
+                        </div>
+                                <h4>Круглосуточная поддержка</h4>
+                        <div class="why-hover-indicator">
+                            <span>Подробнее</span>
+                            <div class="hover-arrow">→</div>
+                        </div>
+                    </div>
+                    <div class="why-card-back">
+                        <div class="why-detail-content">
+                            <h5>24/7 работаем</h5>
+                                <p>оперативное решение аварийных ситуаций</p>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="interactive-why-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="why-card-front">
+                        <div class="why-icon-container">
+                            <div class="why-icon-bg">
+                                <span class="why-icon animate-documents">📋</span>
+                            </div>
+                            <div class="why-glow-effect"></div>
+                        </div>
+                        <h4>Полный документооборот</h4>
+                        <div class="why-hover-indicator">
+                            <span>Подробнее</span>
+                            <div class="hover-arrow">→</div>
+                        </div>
+                    </div>
+                    <div class="why-card-back">
+                        <div class="why-detail-content">
+                            <h5>Все документы</h5>
+                            <p>вся необходимая отчетность</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section class="documents-section" id="documents-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-folder">📄</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Перечень документов</h2>
+            </div>
+            
+            <div class="documents-showcase" data-aos="fade-up" data-aos-delay="200">
+                <div class="showcase-container">
+                    <div class="documents-grid">
+                        <div class="document-card active-doc" data-doc="1" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <span class="animate-check-doc">📋</span>
+                                </div>
+                                <div class="doc-number">01</div>
+                            </div>
+                            <div class="doc-content">
+                                <h4>Акт обследования объекта</h4>
+                                <p>Официальный документ с результатами инспекции</p>
+                                <div class="doc-status">
+                                    <span class="status-badge official">ОФИЦИАЛЬНЫЙ</span>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+
+                        <div class="document-card" data-doc="2" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <span class="animate-report">📝</span>
+                                </div>
+                                <div class="doc-number">02</div>
+                            </div>
+                            <div class="doc-content">
+                                <h4>Дефектная ведомость с фотоотчетом</h4>
+                                <p>Подробное описание всех выявленных нарушений</p>
+                                <div class="doc-status">
+                                    <span class="status-badge detailed">С ФОТО</span>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+
+                        <div class="document-card" data-doc="3" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <span class="animate-chart">📊</span>
+                                </div>
+                                <div class="doc-number">03</div>
+                            </div>
+                            <div class="doc-content">
+                                <h4>Сметная документация</h4>
+                                <p>Расчет стоимости работ по ФЕР и ТЕР</p>
+                                <div class="doc-status">
+                                    <span class="status-badge calculation">РАСЧЁТЫ</span>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+
+                        <div class="document-card" data-doc="4" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <span class="animate-calendar">📅</span>
+                                </div>
+                                <div class="doc-number">04</div>
+                            </div>
+                            <div class="doc-content">
+                                <h4>План ремонтных работ</h4>
+                                <p>Календарный план выполнения мероприятий</p>
+                                <div class="doc-status">
+                                    <span class="status-badge timeline">ГРАФИК</span>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+
+                        <div class="document-card" data-doc="5" data-aos="zoom-in" data-aos-delay="500">
+                            <div class="doc-header">
+                                <div class="doc-icon">
+                                    <span class="animate-task">📋</span>
+                                </div>
+                                <div class="doc-number">05</div>
+                            </div>
+                            <div class="doc-content">
+                                <h4>Техническое задание</h4>
+                                <p>Готовое ТЗ для проведения закупок</p>
+                                <div class="doc-status">
+                                    <span class="status-badge ready">ГОТОВО</span>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+
+                        <!-- Коммерческое предложение -->
+                        <div class="document-card kp-card" data-aos="zoom-in" data-aos-delay="600">
+                            <div class="kp-image-container">
+                                <img src="/media/str7/kp.jpg" alt="Коммерческое предложение" class="kp-image">
+                                <div class="kp-overlay">
+                                    <div class="kp-content">
+                                        <h4>Коммерческое предложение</h4>
+                                        <p>Подробная информация о стоимости услуг</p>
+                                        <div class="doc-status">
+                                            <span class="status-badge kp-badge">КП</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doc-glow"></div>
+                        </div>
+                    </div>
+
+                    <div class="documents-navigation">
+                        <button class="nav-dot active" data-target="1"></button>
+                        <button class="nav-dot" data-target="2"></button>
+                        <button class="nav-dot" data-target="3"></button>
+                        <button class="nav-dot" data-target="4"></button>
+                        <button class="nav-dot" data-target="5"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages-section" id="advantages-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-icon">
+                    <div class="icon-wrapper">
+                        <span class="icon animate-star">✅</span>
+                    </div>
+                </div>
+                <h2 class="section-title">Преимущества</h2>
+                <p class="section-subtitle">Почему госзаказчики выбирают нас</p>
+            </div>
+            
+            <div class="advantages-masonry-grid">
+                <div class="masonry-advantage-card large-card" data-aos="zoom-in-up" data-aos-delay="100">
+                    <div class="advantage-background-effect"></div>
+                    <div class="advantage-floating-elements">
+                        <div class="floating-dot dot-1"></div>
+                        <div class="floating-dot dot-2"></div>
+                        <div class="floating-dot dot-3"></div>
+                    </div>
+                    <div class="advantage-icon-mega">
+                        <div class="icon-orbit">
+                            <span class="mega-emoji animate-speed">⏱</span>
+                        </div>
+                        <div class="icon-shadow"></div>
+                    </div>
+                    <div class="advantage-content-mega">
+                        <div class="advantage-metric">40%</div>
+                        <h4>Сокращение сроков подготовки</h4>
+                        <p>Быстрая подготовка документации для закупок</p>
+                        <div class="advantage-indicator">
+                            <div class="indicator-bar"></div>
+                            <span>ЭФФЕКТИВНОСТЬ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-advantage-card" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="advantage-background-effect"></div>
+                    <div class="advantage-floating-elements">
+                        <div class="floating-dot dot-1"></div>
+                        <div class="floating-dot dot-2"></div>
+                    </div>
+                    <div class="advantage-icon-mega">
+                        <div class="icon-orbit">
+                            <span class="mega-emoji animate-savings">💰</span>
+                        </div>
+                        <div class="icon-shadow"></div>
+                            </div>
+                    <div class="advantage-content-mega">
+                                <h4>Экономия бюджетных средств</h4>
+                                <p>Оптимизация расходов за счет точных расчетов</p>
+                        <div class="advantage-indicator">
+                            <div class="indicator-bar"></div>
+                            <span>ЭКОНОМИЯ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-advantage-card compliance-highlight" data-aos="zoom-in-up" data-aos-delay="300">
+                    <div class="advantage-background-effect"></div>
+                    <div class="compliance-badge">44-ФЗ</div>
+                    <div class="advantage-floating-elements">
+                        <div class="floating-dot dot-1"></div>
+                        <div class="floating-dot dot-2"></div>
+                        <div class="floating-dot dot-3"></div>
+                    </div>
+                    <div class="advantage-icon-mega">
+                        <div class="icon-orbit">
+                            <span class="mega-emoji animate-compliance">📋</span>
+                        </div>
+                        <div class="icon-shadow"></div>
+                            </div>
+                    <div class="advantage-content-mega">
+                                <h4>Полное соответствие требованиям 44-ФЗ</h4>
+                                <p>Все документы соответствуют законодательству</p>
+                        <div class="advantage-indicator compliance">
+                            <div class="indicator-bar"></div>
+                            <span>СООТВЕТСТВИЕ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-advantage-card premium-card" data-aos="zoom-in-up" data-aos-delay="400">
+                    <div class="advantage-background-effect"></div>
+                    <div class="premium-badge">СРО</div>
+                    <div class="advantage-floating-elements">
+                        <div class="floating-dot dot-1"></div>
+                        <div class="floating-dot dot-2"></div>
+                    </div>
+                    <div class="advantage-icon-mega">
+                        <div class="icon-orbit">
+                            <span class="mega-emoji animate-medal">🏅</span>
+                        </div>
+                        <div class="icon-shadow"></div>
+                            </div>
+                    <div class="advantage-content-mega">
+                                <h4>Команда специалистов с допусками СРО</h4>
+                                <p>Высококвалифицированные эксперты</p>
+                        <div class="advantage-indicator premium">
+                            <div class="indicator-bar"></div>
+                            <span>КАЧЕСТВО</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Gallery Section -->
+    <section class="works-gallery-modern" data-aos="fade-up" data-aos-delay="200">
+        <div class="gallery-header">
+            <h2 class="gallery-title">Живые фотографии с объектов</h2>
+            <p class="gallery-subtitle">Работа наших специалистов</p>
+        </div>
+        
+        <div class="interactive-gallery">
+            <div class="gallery-container">
+                <div class="gallery-slider" id="auditGallerySlider">
+                    {% if photos.audit_gallery_1 %}
+                        <div class="gallery-slide active">
+                            <img src="{{ photos.audit_gallery_1.image.url }}" alt="{{ photos.audit_gallery_1.alt_text|default:'Работа 1' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.audit_gallery_2 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_2.image.url }}" alt="{{ photos.audit_gallery_2.alt_text|default:'Работа 2' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_3 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_3.image.url }}" alt="{{ photos.audit_gallery_3.alt_text|default:'Работа 3' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_4 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_4.image.url }}" alt="{{ photos.audit_gallery_4.alt_text|default:'Работа 4' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_5 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_5.image.url }}" alt="{{ photos.audit_gallery_5.alt_text|default:'Работа 5' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_6 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_6.image.url }}" alt="{{ photos.audit_gallery_6.alt_text|default:'Работа 6' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_7 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_7.image.url }}" alt="{{ photos.audit_gallery_7.alt_text|default:'Работа 7' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_8 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_8.image.url }}" alt="{{ photos.audit_gallery_8.alt_text|default:'Работа 8' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_9 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_9.image.url }}" alt="{{ photos.audit_gallery_9.alt_text|default:'Работа 9' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_10 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_10.image.url }}" alt="{{ photos.audit_gallery_10.alt_text|default:'Работа 10' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_11 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_11.image.url }}" alt="{{ photos.audit_gallery_11.alt_text|default:'Работа 11' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_12 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_12.image.url }}" alt="{{ photos.audit_gallery_12.alt_text|default:'Работа 12' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_13 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_13.image.url }}" alt="{{ photos.audit_gallery_13.alt_text|default:'Работа 13' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_14 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_14.image.url }}" alt="{{ photos.audit_gallery_14.alt_text|default:'Работа 14' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+
+                    {% if photos.audit_gallery_15 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.audit_gallery_15.image.url }}" alt="{{ photos.audit_gallery_15.alt_text|default:'Работа 15' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="gallery-navigation">
+                    <button class="gallery-nav-btn prev-btn" onclick="changeSlide('auditGallerySlider', -1)">
+                        <span>‹</span>
+                        Назад
+                    </button>
+                    <button class="gallery-nav-btn next-btn" onclick="changeSlide('auditGallerySlider', 1)">
+                        Вперед
+                        <span>›</span>
+                    </button>
+                </div>
+                
+                <div class="gallery-dots">
+                    {% if photos.audit_gallery_1 %}
+                        <span class="dot active" onclick="currentSlide('auditGallerySlider', 1)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_2 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 2)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_3 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 3)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_4 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 4)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_5 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 5)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_6 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 6)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_7 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 7)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_8 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 8)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_9 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 9)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_10 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 10)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_11 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 11)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_12 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 12)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_13 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 13)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_14 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 14)"></span>
+                    {% endif %}
+                    {% if photos.audit_gallery_15 %}
+                        <span class="dot" onclick="currentSlide('auditGallerySlider', 15)"></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section-modern">
+        <div class="cta-gradient"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <div class="cta-icon">
+                    <span class="audit-icon">📋</span>
+                </div>
+                <h3 class="cta-title">Для организации выезда специалиста направьте заявку</h3>
+                
+                <div class="cta-buttons" data-aos="fade-up" data-aos-delay="200">
+                    <button class="btn-cta-secondary" onclick="requestQuote()">
+                        <span class="btn-text">Запросить КП</span>
+                            <span class="btn-icon">📋</span>
+                        </button>
+                </div>
+                
+                <div class="government-contact" data-aos="fade-up" data-aos-delay="300">
+                    <p class="contact-label">Отдел по работе с госзаказчиками:</p>
+                    <a href="tel:{{ contact_info.phone_main }}" class="government-phone">
+                        <span class="phone-icon">📞</span>
+                            <span>Позвонить</span>
+                        </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Modal для запроса КП -->
+<div id="quoteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Запросить КП</h3>
+            <span class="close" onclick="closeQuoteModal()">&times;</span>
+        </div>
+        <form id="quoteForm" class="modal-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="quoteName">ФИО *</label>
+                <input type="text" id="quoteName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="quotePhone">Телефон *</label>
+                <input type="tel" id="quotePhone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="quoteOrganization">Название организации *</label>
+                <input type="text" id="quoteOrganization" name="organization" required>
+            </div>
+            <input type="hidden" name="service_type" value="Аудит инженерных систем">
+            <button type="submit" class="submit-btn">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{% include 'website/partials/audit_styles.html' %}
+{% endblock %}
+
+{% block extra_js %}
+{% include 'website/partials/audit_scripts.html' %}
+{% endblock %}

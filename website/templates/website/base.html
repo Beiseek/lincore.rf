@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Инженерно-сервисная компания{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% load static %}{% static 'images/favicon-16.ico' %}">
+    <link rel="icon" type="image/x-icon" href="{% load static %}{% static 'images/favicon-32.ico' %}" sizes="32x32">
+    
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=202509212100">
+    
+    <!-- Meta теги -->
+    <meta name="description" content="Профессиональные инженерные услуги: обслуживание, ремонт, монтаж инженерных систем">
+    <meta name="keywords" content="инженерные системы, ремонт, обслуживание, монтаж, отопление, вентиляция">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Инженерно-сервисная компания">
+    <meta property="og:description" content="Профессиональные инженерные услуги">
+    <meta property="og:type" content="website">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Прелоадер -->
+    <div id="preloader">
+        <div class="preloader-spinner">
+            <div class="spinner"></div>
+            <p>Загрузка...</p>
+        </div>
+    </div>
+
+    <!-- Новая расширенная шапка -->
+    <header class="header" id="header">
+        <div class="container">
+            <!-- Верхняя строка с логотипом и контактами -->
+            <div class="header-top">
+                <div class="logo">
+                    <a href="{% url 'website:index' %}" class="logo-link">
+                        <img src="{% static 'images/logo.png' %}" alt="Логотип компании" class="logo-img">
+                    </a>
+                </div>
+                
+                <div class="header-actions">
+                    {% if contact_info %}
+                        <a href="tel:{{ contact_info.phone_main }}" class="phone-link">
+                            <span class="phone-icon">📞</span>
+                            <span>{{ contact_info.phone_main }}</span>
+                        </a>
+                    {% endif %}
+                    
+                    <a href="/#contacts" class="btn-contacts">Контакты</a>
+                    
+                    <button class="btn-tender" id="tenderBtn">
+                        <span class="btn-icon">🎯</span>
+                        <span>Пригласить в тендер</span>
+                    </button>
+                </div>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Нижняя строка с полной навигацией -->
+            <nav class="header-navigation">
+                <div class="nav-grid">
+                    <a href="{% url 'website:complex_service' %}" class="nav-item">
+                        <span class="nav-icon">🔧</span>
+                        <span class="nav-text">Комплексное обслуживание инженерных систем</span>
+                    </a>
+                    <a href="{% url 'website:heating_service' %}" class="nav-item">
+                        <span class="nav-icon">🏭</span>
+                        <span class="nav-text">Комплексное обслуживание систем (ИТП) отопления</span>
+                    </a>
+                    <a href="{% url 'website:verification' %}" class="nav-item">
+                        <span class="nav-icon">⚖️</span>
+                        <span class="nav-text">Поверка приборов учёта</span>
+                    </a>
+                    <a href="{% url 'website:emergency' %}" class="nav-item">
+                        <span class="nav-icon">🚨</span>
+                        <span class="nav-text">Аварийная служба</span>
+                    </a>
+                    <a href="{% url 'website:installation' %}" class="nav-item">
+                        <span class="nav-icon">🔨</span>
+                        <span class="nav-text">Монтаж инженерных коммуникаций</span>
+                    </a>
+                    <a href="{% url 'website:audit' %}" class="nav-item">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-text">Аудит инженерных систем</span>
+                    </a>
+                    <a href="{% url 'website:heating_preparation' %}" class="nav-item">
+                        <span class="nav-icon">❄️</span>
+                        <span class="nav-text">Подготовка к отопительному сезону</span>
+                    </a>
+                    <a href="{% url 'website:ventilation' %}" class="nav-item">
+                        <span class="nav-icon">🌪️</span>
+                        <span class="nav-text">Вентиляция</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Мобильное меню -->
+            <div class="mobile-menu" id="mobileMenu">
+                <div class="mobile-menu-content">
+                    <a href="{% url 'website:complex_service' %}" class="mobile-nav-item">
+                        <span class="nav-icon">🔧</span>
+                        <span class="nav-text">Комплексное обслуживание инженерных систем</span>
+                    </a>
+                    <a href="{% url 'website:heating_service' %}" class="mobile-nav-item">
+                        <span class="nav-icon">🏭</span>
+                        <span class="nav-text">Комплексное обслуживание систем (ИТП) отопления</span>
+                    </a>
+                    <a href="{% url 'website:verification' %}" class="mobile-nav-item">
+                        <span class="nav-icon">⚖️</span>
+                        <span class="nav-text">Поверка приборов учёта</span>
+                    </a>
+                    <a href="{% url 'website:emergency' %}" class="mobile-nav-item">
+                        <span class="nav-icon">🚨</span>
+                        <span class="nav-text">Аварийная служба</span>
+                    </a>
+                    <a href="{% url 'website:installation' %}" class="mobile-nav-item">
+                        <span class="nav-icon">🔨</span>
+                        <span class="nav-text">Монтаж инженерных коммуникаций</span>
+                    </a>
+                    <a href="{% url 'website:audit' %}" class="mobile-nav-item">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-text">Аудит инженерных систем</span>
+                    </a>
+                    <a href="{% url 'website:heating_preparation' %}" class="mobile-nav-item">
+                        <span class="nav-icon">❄️</span>
+                        <span class="nav-text">Подготовка к отопительному сезону</span>
+                    </a>
+                    <a href="{% url 'website:ventilation' %}" class="mobile-nav-item">
+                        <span class="nav-icon">🌪️</span>
+                        <span class="nav-text">Вентиляция</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Основное содержимое -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Модальное окно приглашения в тендер -->
+    <div class="modal" id="tenderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Приглашение в тендер</h3>
+                <button class="modal-close" id="tenderModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="tenderForm" class="form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="tenderFullName">ФИО *</label>
+                        <input type="text" id="tenderFullName" name="full_name" required placeholder="ФИО">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tenderPhone">Телефон для связи *</label>
+                        <input type="tel" id="tenderPhone" name="phone" required placeholder="+7 (999) 999-99-99">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tenderCompany">Название компании</label>
+                        <input type="text" id="tenderCompany" name="company_name" placeholder="Название компании">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tenderFile">Прикрепите техническое задание</label>
+                        <div class="file-upload">
+                            <input type="file" id="tenderFile" name="technical_task" accept=".pdf,.doc,.docx">
+                            <label for="tenderFile" class="file-upload-label">
+                                <i class="icon-upload"></i>
+                                <span>Выберите файл</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="agreed_to_processing" required>
+                            <span class="checkmark"></span>
+                            Согласен на обработку персональных данных
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно заявки на услугу -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Оставить заявку</h3>
+                <button class="modal-close" id="serviceModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="serviceForm" class="form">
+                    <div class="form-group">
+                        <label for="serviceFullName">ФИО *</label>
+                        <input type="text" id="serviceFullName" name="full_name" required placeholder="ФИО">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="servicePhone">Телефон *</label>
+                        <input type="tel" id="servicePhone" name="phone" required placeholder="+7 (999) 999-99-99">
+                    </div>
+                    
+                    <input type="hidden" id="serviceType" name="service_type" value="">
+                    
+                    <button type="submit" class="btn-submit">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно звонка -->
+    <div class="modal" id="callModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Заказать звонок</h3>
+                <button class="modal-close" id="callModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="callForm" class="form">
+                    <div class="form-group">
+                        <label for="callFullName">ФИО:</label>
+                        <input type="text" id="callFullName" name="full_name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="callPhone">Номер телефона:</label>
+                        <input type="tel" id="callPhone" name="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary call-submit-btn">Заказать звонок</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications"></div>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/main.js' %}?v=202509211380"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Intersection Observer Polyfill для старых браузеров -->
+    <script>
+        if (!('IntersectionObserver' in window)) {
+            var script = document.createElement('script');
+            script.src = 'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver';
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>

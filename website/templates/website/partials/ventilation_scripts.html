@@ -1,0 +1,957 @@
+<script>
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+console.log('🔐 CSRF token:', csrftoken);
+
+// Initialize AOS (if available)
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        delay: 100
+    });
+} else {
+    console.log('⚠️ AOS not loaded, skipping animation initialization');
+}
+
+// Initialize counter animations
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const increment = target / 60;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            
+            if (current >= target) {
+                counter.textContent = target + (target < 10 ? '' : '');
+                clearInterval(timer);
+            } else {
+                counter.textContent = Math.floor(current);
+            }
+        }, 30);
+    });
+}
+
+// Navigation pills functionality
+function initNavigationPills() {
+    const pills = document.querySelectorAll('.pill-btn');
+    const progressFill = document.querySelector('.progress-fill');
+    
+    pills.forEach((pill, index) => {
+        pill.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Update active pill
+            pills.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update progress bar
+            const progress = ((index + 1) / pills.length) * 100;
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            
+            // Scroll to target section
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Enhanced icon animations
+function initIconAnimations() {
+    // Service icons (old)
+    const serviceIcons = document.querySelectorAll('.service-icon');
+    serviceIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+            this.style.transform = 'scale(1.3) rotate(360deg)';
+            this.style.transition = 'transform 0.6s ease-out';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+            this.style.transform = '';
+            this.style.transition = '';
+        });
+        
+        icon.addEventListener('click', function() {
+            this.style.transform = 'scale(1.5) rotate(720deg)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 600);
+        });
+    });
+    
+    // Mega service icons (new)
+    const megaServiceIcons = document.querySelectorAll('.mega-service-icon');
+    megaServiceIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.4) rotate(20deg)';
+            this.style.filter = 'brightness(1.4)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.filter = '';
+        });
+        
+        icon.addEventListener('click', function() {
+            this.style.transform = 'scale(1.6) rotate(360deg)';
+            this.style.filter = 'brightness(1.6)';
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.filter = '';
+            }, 800);
+        });
+    });
+    
+    // Ultra control icons (new)
+    const ultraControlIcons = document.querySelectorAll('.ultra-control-icon');
+    ultraControlIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.5) rotate(25deg)';
+            this.style.filter = 'brightness(1.5)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.filter = '';
+        });
+        
+        icon.addEventListener('click', function() {
+            this.style.transform = 'scale(1.8) rotate(720deg)';
+            this.style.filter = 'brightness(1.8)';
+            createExplosionEffect(this);
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.filter = '';
+            }, 1000);
+        });
+    });
+    
+    // Timeline icons
+    const timelineIcons = document.querySelectorAll('.timeline-icon');
+    timelineIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2) rotate(360deg)';
+            this.style.transition = 'transform 0.6s ease-out';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.transition = '';
+        });
+    });
+    
+    // Control icons
+    const controlIcons = document.querySelectorAll('.control-icon');
+    controlIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+            this.style.transform = 'scale(1.4) rotate(-360deg)';
+            this.style.transition = 'transform 0.6s ease-out';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+            this.style.transform = '';
+            this.style.transition = '';
+        });
+    });
+    
+    // Advantage icons
+    const advantageIcons = document.querySelectorAll('.advantage-icon-modern');
+    advantageIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+            this.style.transform = 'scale(1.3) rotate(360deg)';
+            this.style.transition = 'transform 0.6s ease-out';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+            this.style.transform = '';
+            this.style.transition = '';
+        });
+    });
+}
+
+// Works Gallery functionality
+let gallerySlides = {};
+
+function changeSlide(sliderId, direction) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.gallery-slide');
+    const galleryContainer = slider.closest('.gallery-container');
+    const dots = galleryContainer ? galleryContainer.querySelectorAll('.dot') : [];
+    
+    if (!gallerySlides[sliderId]) {
+        gallerySlides[sliderId] = 0;
+    }
+    
+    let currentSlide = gallerySlides[sliderId];
+    
+    // Remove active class from current slide and dot
+    if (slides[currentSlide]) {
+        slides[currentSlide].classList.remove('active');
+    }
+    if (dots[currentSlide]) {
+        dots[currentSlide].classList.remove('active');
+    }
+    
+    // Calculate new slide index
+    if (direction === 1) { // next
+        currentSlide = (currentSlide + 1) % slides.length;
+    } else { // prev
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    }
+    
+    gallerySlides[sliderId] = currentSlide;
+    
+    // Add active class to new slide and dot
+    if (slides[currentSlide]) {
+        slides[currentSlide].classList.add('active');
+    }
+    if (dots[currentSlide]) {
+        dots[currentSlide].classList.add('active');
+    }
+}
+
+function currentSlide(sliderId, slideIndex) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.gallery-slide');
+    const galleryContainer = slider.closest('.gallery-container');
+    const dots = galleryContainer ? galleryContainer.querySelectorAll('.dot') : [];
+    
+    if (!gallerySlides[sliderId]) {
+        gallerySlides[sliderId] = 0;
+    }
+    
+    let currentSlideIndex = gallerySlides[sliderId];
+    
+    // Remove active class from current slide and dot
+    if (slides[currentSlideIndex]) {
+        slides[currentSlideIndex].classList.remove('active');
+    }
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.remove('active');
+    }
+    
+    // Set new slide index (slideIndex is 1-based)
+    gallerySlides[sliderId] = slideIndex - 1;
+    
+    // Add active class to new slide and dot
+    if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].classList.add('active');
+    }
+    if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].classList.add('active');
+    }
+}
+
+function initGallery() {
+    // Initialize gallery slides
+    const sliders = document.querySelectorAll('.gallery-slider');
+    sliders.forEach(slider => {
+        const sliderId = slider.id;
+        if (sliderId) {
+            gallerySlides[sliderId] = 0;
+        }
+    });
+    
+    // Auto-slide for ventilation gallery
+    setInterval(() => {
+        changeSlide('ventilationGallerySlider', 1);
+    }, 5000);
+}
+
+// Modal functionality
+function openApplicationModal() {
+    console.log('🔓 Opening application modal...');
+    const modal = document.getElementById('applicationModal');
+    console.log('📱 Application modal found:', modal);
+    
+    if (modal) {
+        const serviceTypeInput = modal.querySelector('input[name="service_type"]');
+        console.log('🎯 Service type input found:', serviceTypeInput);
+        
+        if (serviceTypeInput) {
+            serviceTypeInput.value = 'ventilation_service';
+            console.log('✅ Service type set to:', serviceTypeInput.value);
+        }
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        console.log('✅ Application modal opened');
+        
+        // Re-initialize forms when modal opens
+        setTimeout(initForms, 50);
+    } else {
+        console.error('❌ Application modal not found!');
+    }
+}
+
+function closeApplicationModal() {
+    const modal = document.getElementById('applicationModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function openCallbackModal() {
+    console.log('📞 Opening callback modal...');
+    const modal = document.getElementById('callbackModal');
+    console.log('📱 Callback modal found:', modal);
+    
+    if (modal) {
+        const serviceTypeInput = modal.querySelector('input[name="service_type"]');
+        console.log('🎯 Service type input found:', serviceTypeInput);
+        
+        if (serviceTypeInput) {
+            serviceTypeInput.value = 'ventilation_service';
+            console.log('✅ Service type set to:', serviceTypeInput.value);
+        }
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        console.log('✅ Callback modal opened');
+        
+        // Re-initialize forms when modal opens
+        setTimeout(initForms, 50);
+    } else {
+        console.error('❌ Callback modal not found!');
+    }
+}
+
+function closeCallbackModal() {
+    const modal = document.getElementById('callbackModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// CTA section enhanced interactions
+function initCTAInteractions() {
+    const ctaIcon = document.querySelector('.ventilation-icon');
+    const ctaButtons = document.querySelectorAll('.cta-section-modern .btn-modern');
+    const phoneCall = document.querySelector('.animated-phone-call');
+    
+    // Enhanced ventilation icon animation
+    if (ctaIcon) {
+        ctaIcon.addEventListener('click', function() {
+            this.style.transform = 'scale(1.5) rotate(360deg)';
+            this.style.filter = 'brightness(1.5)';
+            
+            // Create explosion effect
+            createExplosionEffect(this);
+            
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.filter = '';
+            }, 600);
+        });
+    }
+    
+    // Enhanced button interactions
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            createRipple(e, this);
+        });
+        
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+    
+    // Phone ring animation
+    if (phoneCall) {
+        phoneCall.addEventListener('mouseenter', function() {
+            const phoneIcon = this.querySelector('.phone-icon');
+            if (phoneIcon) {
+                phoneIcon.style.animation = 'phoneRing 0.5s ease-in-out 3';
+            }
+        });
+    }
+}
+
+// Floating messages system
+function showFloatingMessage(message, element) {
+    const floatingMsg = document.createElement('div');
+    floatingMsg.textContent = message;
+    floatingMsg.style.cssText = `
+        position: absolute;
+        background: rgba(30, 136, 229, 0.9);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        pointer-events: none;
+        z-index: 1000;
+        animation: floatUp 2s ease-out forwards;
+        white-space: nowrap;
+    `;
+    
+    const rect = element.getBoundingClientRect();
+    floatingMsg.style.left = (rect.left + rect.width / 2) + 'px';
+    floatingMsg.style.top = (rect.top - 10) + 'px';
+    floatingMsg.style.transform = 'translateX(-50%)';
+    
+    document.body.appendChild(floatingMsg);
+    
+    setTimeout(() => {
+        floatingMsg.remove();
+    }, 2000);
+}
+
+// Ripple effect creator
+function createRipple(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: rippleEffect 0.6s ease-out;
+        pointer-events: none;
+    `;
+    
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Explosion effect creator
+function createExplosionEffect(element) {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.textContent = '💨';
+        particle.style.cssText = `
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 1000;
+            left: ${centerX}px;
+            top: ${centerY}px;
+            animation: explode 1s ease-out forwards;
+        `;
+        
+        const angle = (i / 12) * 2 * Math.PI;
+        const distance = 100;
+        particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+        particle.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
+}
+
+// Enhanced notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    
+    const bgColors = {
+        'success': 'linear-gradient(135deg, #10b981, #059669)',
+        'error': 'linear-gradient(135deg, #ef4444, #dc2626)',
+        'info': 'linear-gradient(135deg, #1e88e5, #0d47a1)',
+        'warning': 'linear-gradient(135deg, #f59e0b, #d97706)'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${bgColors[type]};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-weight: 600;
+        min-width: 250px;
+        text-align: center;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Scroll effects for background elements
+function initScrollEffects() {
+    let ticking = false;
+    
+    function updateScrollEffects() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero-particles, .hero-gradient');
+        
+        parallaxElements.forEach(element => {
+            const speed = element.classList.contains('hero-particles') ? 0.5 : 0.3;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+        
+        // Animate section icons based on scroll
+        const sectionIcons = document.querySelectorAll('.icon-wrapper .icon');
+        sectionIcons.forEach(icon => {
+            const rect = icon.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                icon.style.animation = 'none';
+                icon.offsetHeight; // Trigger reflow
+                icon.style.animation = 'airFlow 2s ease-in-out infinite';
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick);
+}
+
+// Initial page load animation
+function initPageLoadAnimation() {
+    // Animate hero elements sequentially
+    const heroElements = [
+        '.hero-badge',
+        '.hero-title',
+        '.hero-description', 
+        '.hero-stats',
+        '.hero-actions',
+        '.scroll-indicator'
+    ];
+    
+    heroElements.forEach((selector, index) => {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                element.style.transition = 'all 0.6s ease-out';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, 100 + (index * 150));
+        }
+    });
+    
+    // Show welcome notification
+    setTimeout(() => {
+        showNotification('Добро пожаловать! Обслуживание вентиляции и кондиционирования', 'success');
+    }, 1000);
+}
+
+function handleFormSubmit(form, successMessage, errorMessage) {
+    console.log('📤 handleFormSubmit called for form:', form);
+    const formData = new FormData(form);
+    
+    // Log form data for debugging
+    console.log('📋 Form data:');
+    for (let [key, value] of formData.entries()) {
+        console.log(`  ${key}: ${value}`);
+    }
+
+    showNotification('Отправка...', 'info');
+    
+    console.log('🌐 Starting fetch request to /submit-request/');
+    console.log('🔑 Using CSRF token:', csrftoken);
+
+    fetch('/submit-request/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrftoken
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return response.text().then(text => { throw new Error('Ошибка сервера: ' + response.status + ' ' + text) });
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            showNotification(successMessage, 'success');
+            form.reset();
+            if (form.closest('.modal').id === 'applicationModal') {
+                closeApplicationModal();
+            } else if (form.closest('.modal').id === 'callbackModal') {
+                closeCallbackModal();
+            }
+        } else {
+            showNotification(errorMessage + (data.error || 'Неизвестная ошибка'), 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification(errorMessage + 'Попробуйте еще раз.', 'error');
+    });
+}
+
+// Enhanced mega service cards interactions
+function initMegaServiceCards() {
+    const megaCards = document.querySelectorAll('.mega-service-card');
+    
+    megaCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Add floating effect to features
+            const features = this.querySelectorAll('.mega-feature-point');
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.style.transform = 'translateX(10px) scale(1.02)';
+                }, index * 100);
+            });
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const features = this.querySelectorAll('.mega-feature-point');
+            features.forEach(feature => {
+                feature.style.transform = '';
+            });
+        });
+        
+        card.addEventListener('click', function() {
+            createRipple(event, this);
+            showFloatingMessage('Услуга выбрана!', this);
+        });
+    });
+}
+
+// Enhanced ultra control cards interactions
+function initUltraControlCards() {
+    const ultraCards = document.querySelectorAll('.ultra-control-card');
+    
+    ultraCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Activate feature indicators
+            const indicators = this.querySelectorAll('.feature-indicator');
+            indicators.forEach((indicator, index) => {
+                setTimeout(() => {
+                    indicator.style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.8)';
+                    indicator.style.transform = 'scale(1.3)';
+                }, index * 150);
+            });
+            
+            // Start data visualization
+            const dataPulse = this.querySelector('.data-pulse');
+            if (dataPulse) {
+                dataPulse.style.animationDuration = '1s';
+            }
+            
+            const progressRing = this.querySelector('.progress-fill-ring');
+            if (progressRing) {
+                progressRing.style.animationDuration = '1s';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const indicators = this.querySelectorAll('.feature-indicator');
+            indicators.forEach(indicator => {
+                indicator.style.boxShadow = '';
+                indicator.style.transform = '';
+            });
+            
+            const dataPulse = this.querySelector('.data-pulse');
+            if (dataPulse) {
+                dataPulse.style.animationDuration = '2s';
+            }
+            
+            const progressRing = this.querySelector('.progress-fill-ring');
+            if (progressRing) {
+                progressRing.style.animationDuration = '2s';
+            }
+        });
+        
+        card.addEventListener('click', function() {
+            createExplosionEffect(this);
+            showFloatingMessage('Мониторинг активирован!', this);
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+function initForms() {
+    console.log('🔧 === INITIALIZING FORMS ===');
+    
+    // Service application form submission
+    console.log('🔍 Looking for serviceApplicationForm...');
+    const serviceApplicationForm = document.getElementById('serviceApplicationForm');
+    console.log('📝 serviceApplicationForm found:', serviceApplicationForm);
+    
+    if (serviceApplicationForm) {
+        console.log('✅ Setting up serviceApplicationForm event listener');
+        // Remove any existing event listeners by cloning the node
+        const newForm = serviceApplicationForm.cloneNode(true);
+        serviceApplicationForm.parentNode.replaceChild(newForm, serviceApplicationForm);
+        
+        // Add hidden inputs for request_type
+        let requestTypeInput = newForm.querySelector('input[name="request_type"]');
+        if(!requestTypeInput) {
+            requestTypeInput = document.createElement('input');
+            requestTypeInput.type = 'hidden';
+            requestTypeInput.name = 'request_type';
+            newForm.appendChild(requestTypeInput);
+        }
+        requestTypeInput.value = 'application';
+        
+        // Add hidden input for service_type
+        let serviceTypeInput = newForm.querySelector('input[name="service_type"]');
+        if(!serviceTypeInput) {
+            serviceTypeInput = document.createElement('input');
+            serviceTypeInput.type = 'hidden';
+            serviceTypeInput.name = 'service_type';
+            newForm.appendChild(serviceTypeInput);
+        }
+        serviceTypeInput.value = 'ventilation_service';
+
+        newForm.addEventListener('submit', function(e) {
+            console.log('🚀 Application form submitted!');
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🛑 Default action prevented');
+            handleFormSubmit(this, 'Заявка успешно отправлена!', 'Ошибка при отправке заявки: ');
+            return false;
+        });
+        
+        console.log('✅ Application form initialized');
+    } else {
+        console.error('❌ serviceApplicationForm not found!');
+    }
+    
+    // Callback form submission
+    console.log('🔍 Looking for callbackForm...');
+    const callbackForm = document.getElementById('callbackForm');
+    console.log('📞 callbackForm found:', callbackForm);
+    
+    if (callbackForm) {
+        console.log('✅ Setting up callbackForm event listener');
+        // Remove any existing event listeners by cloning the node
+        const newCallbackForm = callbackForm.cloneNode(true);
+        callbackForm.parentNode.replaceChild(newCallbackForm, callbackForm);
+        
+        // Add hidden input for request_type
+        let requestTypeInput = newCallbackForm.querySelector('input[name="request_type"]');
+        if(!requestTypeInput) {
+            requestTypeInput = document.createElement('input');
+            requestTypeInput.type = 'hidden';
+            requestTypeInput.name = 'request_type';
+            newCallbackForm.appendChild(requestTypeInput);
+        }
+        requestTypeInput.value = 'callback';
+        
+        // Add hidden input for service_type
+        let serviceTypeInput = newCallbackForm.querySelector('input[name="service_type"]');
+        if(!serviceTypeInput) {
+            serviceTypeInput = document.createElement('input');
+            serviceTypeInput.type = 'hidden';
+            serviceTypeInput.name = 'service_type';
+            newCallbackForm.appendChild(serviceTypeInput);
+        }
+        serviceTypeInput.value = 'ventilation_service';
+
+        newCallbackForm.addEventListener('submit', function(e) {
+            console.log('📞 Callback form submitted!');
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🛑 Default action prevented');
+            handleFormSubmit(this, 'Запрос на обратный звонок отправлен!', 'Ошибка при отправке запроса: ');
+            return false;
+        });
+        
+        console.log('✅ Callback form initialized');
+    } else {
+        console.error('❌ callbackForm not found!');
+    }
+    
+    console.log('🔧 === FORMS INITIALIZATION COMPLETE ===');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Ventilation page JavaScript loaded');
+    
+    // Initialize all functionality
+    animateCounters();
+    initNavigationPills();
+    initIconAnimations();
+    initGallery();
+    initCTAInteractions();
+    initScrollEffects();
+    initPageLoadAnimation();
+    initMegaServiceCards();
+    initUltraControlCards();
+    
+    // Initialize forms with delay to ensure modal elements are loaded
+    setTimeout(initForms, 100);
+    
+    // Modal event listeners
+    const applicationModal = document.getElementById('applicationModal');
+    const callbackModal = document.getElementById('callbackModal');
+    
+    if (applicationModal) {
+        applicationModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeApplicationModal();
+            }
+        });
+    }
+    
+    if (callbackModal) {
+        callbackModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCallbackModal();
+            }
+        });
+    }
+    
+    
+    // Enhanced keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeApplicationModal();
+            closeCallbackModal();
+        }
+    });
+    
+    // Enhanced smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+// CSS for additional animations
+const additionalCSS = `
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes explode {
+    to {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes phoneRing {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+    20%, 40%, 60%, 80% { transform: rotate(10deg); }
+}
+`;
+
+// Inject additional CSS
+const styleSheet = document.createElement('style');
+styleSheet.type = 'text/css';
+styleSheet.innerText = additionalCSS;
+document.head.appendChild(styleSheet);
+</script>

@@ -1,0 +1,175 @@
+<script>
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+// Global form submission handler
+function submitQuoteForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    // Ensure service_type is set correctly
+    if (!formData.has('service_type')) {
+        formData.append('service_type', 'heating_preparation_service');
+    } else {
+        formData.set('service_type', 'heating_preparation_service');
+    }
+            
+    showNotification('Отправка запроса на коммерческое предложение...', 'info');
+            
+    fetch('/submit-request/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrftoken
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Ошибка сервера: ' + response.status);
+        }
+    })
+    .then(data => {
+        if (data.success) {
+            showNotification('Запрос на коммерческое предложение отправлен!', 'success');
+            closeQuoteModal();
+            form.reset();
+        } else {
+            showNotification('Ошибка при отправке запроса: ' + (data.error || 'Неизвестная ошибка'), 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Ошибка при отправке запроса. Попробуйте еще раз.', 'error');
+    });
+}
+
+
+// Modal functionality
+function openQuoteModal() {
+    const modal = document.getElementById('quoteModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeQuoteModal() {
+    const modal = document.getElementById('quoteModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Enhanced notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    
+    const bgColors = {
+        'success': 'linear-gradient(135deg, #10b981, #059669)',
+        'error': 'linear-gradient(135deg, #ef4444, #dc2626)',
+        'info': 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+        'warning': 'linear-gradient(135deg, #f59e0b, #d97706)'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${bgColors[type]};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-weight: 600;
+        min-width: 250px;
+        text-align: center;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Initialize AOS
+AOS.init({
+    // ... existing AOS initialization ...
+});
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // The old submit handler is now removed. The submission is handled by the global `submitQuoteForm` function via the `onsubmit` attribute in the HTML.
+    
+    // Modal event listeners
+    const quoteModal = document.getElementById('quoteModal');
+    
+    if (quoteModal) {
+        quoteModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQuoteModal();
+            }
+        });
+    }
+    
+    // Enhanced keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeQuoteModal();
+        }
+    });
+
+    const additionalCSS = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = additionalCSS;
+    document.head.appendChild(styleSheet);
+});
+</script>

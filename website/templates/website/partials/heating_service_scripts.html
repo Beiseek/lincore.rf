@@ -1,0 +1,266 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("STARTING DIAGNOSTICS for heating_service page gallery.");
+
+    const galleryId = 'heatingServiceGallerySlider';
+    const gallerySlider = document.getElementById(galleryId);
+
+    if (!gallerySlider) {
+        console.error(`DIAGNOSTICS: Gallery element with ID '${galleryId}' was NOT FOUND. The script cannot continue.`);
+        return;
+    }
+    console.log("DIAGNOSTICS: Successfully found gallery element:", gallerySlider);
+
+    const slides = gallerySlider.querySelectorAll('.gallery-slide');
+    console.log(`DIAGNOSTICS: Found ${slides.length} slides inside the gallery.`);
+
+    if (slides.length === 0) {
+        console.warn("DIAGNOSTICS: Gallery has zero slides. The script will stop because there is nothing to show.");
+        return;
+    }
+
+    const container = gallerySlider.closest('.gallery-container');
+    if (!container) {
+        console.error("DIAGNOSTICS: Could not find the parent element with class '.gallery-container'. This is a critical error.");
+        return;
+    }
+    console.log("DIAGNOSTICS: Found the main gallery container:", container);
+
+    const prevBtn = container.querySelector('.prev-btn');
+    const nextBtn = container.querySelector('.next-btn');
+    const dotsContainer = container.querySelector('.gallery-dots');
+
+    console.log("DIAGNOSTICS: Previous button found:", prevBtn);
+    console.log("DIAGNOSTICS: Next button found:", nextBtn);
+    console.log("DIAGNOSTICS: Dots container found:", dotsContainer);
+
+    if (!prevBtn || !nextBtn || !dotsContainer) {
+        console.error("DIAGNOSTICS: One or more navigation elements (prev/next buttons, or dots container) are missing within the gallery container.");
+        return;
+    }
+
+    let currentSlideIndex = 0;
+    let autoSlideInterval;
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                console.log(`DIAGNOSTICS: Dot ${index + 1} clicked.`);
+                goToSlide(index);
+                resetAutoSlide();
+            });
+            dotsContainer.appendChild(dot);
+        });
+        console.log(`DIAGNOSTICS: Successfully created ${slides.length} navigation dots.`);
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlideIndex);
+        });
+    }
+
+    function goToSlide(index) {
+        console.log(`DIAGNOSTICS: Attempting to switch from slide ${currentSlideIndex + 1} to slide ${index + 1}.`);
+        if (slides[currentSlideIndex]) {
+             slides[currentSlideIndex].classList.remove('active');
+        }
+        currentSlideIndex = index;
+        if (slides[currentSlideIndex]) {
+            slides[currentSlideIndex].classList.add('active');
+        }
+        updateDots();
+    }
+
+    function changeSlide(direction) {
+        const newIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+        goToSlide(newIndex);
+    }
+
+    function startAutoSlide() {
+        console.log("DIAGNOSTICS: Starting auto-slide timer (5 seconds interval).");
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            console.log("DIAGNOSTICS: Auto-sliding to the next image.");
+            changeSlide(1);
+        }, 5000);
+    }
+
+    function resetAutoSlide() {
+        console.log("DIAGNOSTICS: Resetting auto-slide timer due to user interaction.");
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    prevBtn.addEventListener('click', () => {
+        console.log("DIAGNOSTICS: Previous button clicked.");
+        changeSlide(-1);
+        resetAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        console.log("DIAGNOSTICS: Next button clicked.");
+        changeSlide(1);
+        resetAutoSlide();
+    });
+
+    console.log("DIAGNOSTICS: Initializing gallery logic...");
+    createDots();
+    startAutoSlide();
+    console.log("DIAGNOSTICS: Gallery initialization complete. Everything should be working.");
+});
+
+// Navigation pills functionality
+const pillBtns = document.querySelectorAll('.pill-btn');
+const progressFill = document.querySelector('.progress-fill');
+
+pillBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        pillBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update progress bar
+        const progress = ((index + 1) / pillBtns.length) * 100;
+        if (progressFill) {
+            progressFill.style.width = progress + '%';
+        }
+        
+        // Scroll to target section
+        const targetId = btn.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Modal functionality
+function openApplicationModal() {
+    const modal = document.getElementById('applicationModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Set service type for heating service
+        const serviceTypeInput = modal.querySelector('input[name="service_type"]');
+        if (serviceTypeInput) {
+            serviceTypeInput.value = 'heating_service';
+        }
+    }
+}
+
+function closeApplicationModal() {
+    const modal = document.getElementById('applicationModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function openCallbackModal() {
+    const modal = document.getElementById('callbackModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCallbackModal() {
+    const modal = document.getElementById('callbackModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close modals when clicking outside
+window.onclick = function(event) {
+    const applicationModal = document.getElementById('applicationModal');
+    const callbackModal = document.getElementById('callbackModal');
+    
+    if (event.target === applicationModal) {
+        closeApplicationModal();
+    }
+    if (event.target === callbackModal) {
+        closeCallbackModal();
+    }
+}
+
+// Form submission handlers
+document.addEventListener('DOMContentLoaded', function() {
+    // Application form handler
+    const applicationForm = document.getElementById('applicationForm');
+    if (applicationForm) {
+        applicationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitForm('applicationForm', 'application');
+        });
+    }
+    
+    // Callback form handler
+    const callbackForm = document.getElementById('callbackForm');
+    if (callbackForm) {
+        callbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitForm('callbackForm', 'callback');
+        });
+    }
+});
+
+function submitForm(formId, type) {
+    const form = document.getElementById(formId);
+    const formData = new FormData(form);
+    
+    // Добавляем правильные параметры
+    formData.append('request_type', type);
+    
+    fetch('/submit-request/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Заявка успешно отправлена!');
+            if (type === 'application') {
+                closeApplicationModal();
+            } else {
+                closeCallbackModal();
+            }
+            form.reset();
+        } else {
+            alert('Ошибка при отправке заявки: ' + (data.error || 'Неизвестная ошибка'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+    });
+}
+</script>

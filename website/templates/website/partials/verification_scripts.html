@@ -1,0 +1,402 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+    }
+
+    // Counter animation for stats
+    function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.count);
+            const increment = target / 50;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            // Start animation when element is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(counter);
+        });
+    }
+    
+    animateCounters();
+
+    // Navigation pills functionality
+    const pillBtns = document.querySelectorAll('.pill-btn');
+    const progressFill = document.querySelector('.progress-fill');
+
+    pillBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            pillBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Update progress bar
+            const progress = ((index + 1) / pillBtns.length) * 100;
+            progressFill.style.width = progress + '%';
+            
+            // Scroll to target section
+            const targetId = btn.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero-particles, .hero-gradient');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // Enhanced hover effects for cards
+    const cards = document.querySelectorAll('.instrument-card, .advantage-card, .feature-card, .timeline-content');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // Interactive animations for icons
+    const animatedIcons = document.querySelectorAll('.section-icon, .feature-icon, .instrument-icon, .timeline-icon');
+    animatedIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2) rotate(10deg)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+
+    // Timeline item entrance animation on scroll
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        timelineObserver.observe(item);
+    });
+
+    // Enhanced instrument card animations
+    const instrumentCards = document.querySelectorAll('.instrument-card');
+    instrumentCards.forEach((card, index) => {
+        card.addEventListener('mouseenter', function() {
+            const icon = card.querySelector('.instrument-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const icon = card.querySelector('.instrument-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }
+        });
+    });
+
+    // Add floating effect to advantage cards
+    const advantageCards = document.querySelectorAll('.advantage-card');
+    advantageCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.animation = `floatingCard ${3 + index * 0.5}s ease-in-out infinite`;
+        }, index * 200);
+    });
+
+    // Add CSS for floating animation if not already defined
+    if (!document.querySelector('#floating-animation-styles')) {
+        const floatingStyles = document.createElement('style');
+        floatingStyles.id = 'floating-animation-styles';
+        floatingStyles.textContent = `
+            @keyframes floatingCard {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-3px); }
+            }
+        `;
+        document.head.appendChild(floatingStyles);
+    }
+
+    // Special offer animation on scroll
+    const specialOffer = document.querySelector('.special-offer');
+    if (specialOffer) {
+        const offerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'offerPulse 2s ease-in-out infinite';
+                }
+            });
+        });
+        
+        offerObserver.observe(specialOffer);
+        
+        // Add CSS for offer animation
+        if (!document.querySelector('#offer-animation-styles')) {
+            const offerStyles = document.createElement('style');
+            offerStyles.id = 'offer-animation-styles';
+            offerStyles.textContent = `
+                @keyframes offerPulse {
+                    0%, 100% { box-shadow: 0 20px 60px rgba(39, 174, 96, 0.3); }
+                    50% { box-shadow: 0 25px 70px rgba(39, 174, 96, 0.5); }
+                }
+            `;
+            document.head.appendChild(offerStyles);
+        }
+    }
+
+    // Enhanced CTA section animation
+    const ctaSection = document.querySelector('.cta-section-modern');
+    if (ctaSection) {
+        const ctaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const ctaIcon = entry.target.querySelector('.cta-icon');
+                    if (ctaIcon) {
+                        ctaIcon.style.animation = 'ctaIconSpin 1s ease-in-out';
+                        setTimeout(() => {
+                            ctaIcon.style.animation = 'ctaIconGlow 3s ease-in-out infinite';
+                        }, 1000);
+                    }
+                }
+            });
+        });
+        
+        ctaObserver.observe(ctaSection);
+        
+        // Add CSS for CTA animation
+        if (!document.querySelector('#cta-animation-styles')) {
+            const ctaStyles = document.createElement('style');
+            ctaStyles.id = 'cta-animation-styles';
+            ctaStyles.textContent = `
+                @keyframes ctaIconSpin {
+                    0% { transform: scale(1) rotate(0deg); }
+                    50% { transform: scale(1.2) rotate(180deg); }
+                    100% { transform: scale(1) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(ctaStyles);
+        }
+    }
+});
+
+// Modal functions
+function openApplicationModal() {
+    document.getElementById('applicationModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeApplicationModal() {
+    document.getElementById('applicationModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function openCallbackModal() {
+    document.getElementById('callbackModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCallbackModal() {
+    document.getElementById('callbackModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const applicationModal = document.getElementById('applicationModal');
+    const callbackModal = document.getElementById('callbackModal');
+    
+    if (event.target === applicationModal) {
+        closeApplicationModal();
+    }
+    if (event.target === callbackModal) {
+        closeCallbackModal();
+    }
+});
+
+// Form submissions
+document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    // Добавляем тип заявки
+    formData.append('request_type', 'application');
+    
+    fetch('/submit-request/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+            closeApplicationModal();
+            this.reset();
+        } else {
+            alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+    });
+});
+
+document.getElementById('callbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    // Добавляем тип заявки
+    formData.append('request_type', 'callback');
+    
+    fetch('/submit-request/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Заявка на звонок успешно отправлена! Наш специалист свяжется с вами в ближайшее время.');
+            closeCallbackModal();
+            this.reset();
+        } else {
+            alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка при отправке заявки. Попробуйте еще раз.');
+    });
+});
+
+// Verification Gallery Slider
+let verificationCurrentSlide = 0;
+const verificationSlides = document.querySelectorAll('#verificationGallerySlider .gallery-slide');
+const verificationTotalSlides = verificationSlides.length;
+
+function verificationShowSlide(index) {
+    verificationSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+    
+    // Update indicators
+    const indicators = document.querySelectorAll('#verificationGalleryIndicators .gallery-indicator');
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
+}
+
+function verificationNextSlide() {
+    verificationCurrentSlide = (verificationCurrentSlide + 1) % verificationTotalSlides;
+    verificationShowSlide(verificationCurrentSlide);
+}
+
+function verificationPrevSlide() {
+    verificationCurrentSlide = (verificationCurrentSlide - 1 + verificationTotalSlides) % verificationTotalSlides;
+    verificationShowSlide(verificationCurrentSlide);
+}
+
+// Initialize verification gallery
+document.addEventListener('DOMContentLoaded', function() {
+    if (verificationTotalSlides > 0) {
+        // Create indicators
+        const indicatorsContainer = document.getElementById('verificationGalleryIndicators');
+        if (indicatorsContainer) {
+            for (let i = 0; i < verificationTotalSlides; i++) {
+                const indicator = document.createElement('button');
+                indicator.className = 'gallery-indicator';
+                if (i === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => {
+                    verificationCurrentSlide = i;
+                    verificationShowSlide(verificationCurrentSlide);
+                });
+                indicatorsContainer.appendChild(indicator);
+            }
+        }
+        
+        // Add event listeners
+        const nextBtn = document.getElementById('verificationGalleryNext');
+        const prevBtn = document.getElementById('verificationGalleryPrev');
+        
+        if (nextBtn) nextBtn.addEventListener('click', verificationNextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', verificationPrevSlide);
+        
+        // Auto-scroll
+        setInterval(verificationNextSlide, 5000);
+    }
+});
+</script>
+
+

@@ -1,0 +1,928 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Поверка приборов учёта - Инженерно-сервисная компания{% endblock %}
+
+{% block content %}
+<div class="modern-verification-page">
+    <!-- Modern Hero Section -->
+    <section class="modern-hero-section">
+        <div class="hero-gradient"></div>
+        <div class="hero-particles"></div>
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="100">
+                    <span class="badge-icon">⚖️</span>
+                    <span>Аккредитованная метрологическая лаборатория</span>
+                </div>
+                
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="title-main white-title">Поверка, ремонт и восстановление</span>
+                    <span class="title-accent white-title">приборов учета</span>
+                </h1>
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Аккредитованная метрологическая лаборатория. Полный цикл услуг от поверки до восстановления. 
+                    Официальные документы для РСО. Экономия до 70% вместо замены.
+                </p>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="70">0</div>
+                        <div class="stat-label">% экономии</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2">0</div>
+                        <div class="stat-label">раза быстрее</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">часа в сутки</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+        <button class="btn-modern btn-primary" onclick="openApplicationModal()">
+            <span class="btn-text">Оставить заявку</span>
+            <span class="btn-icon">📝</span>
+        </button>
+                    <button class="btn-modern btn-secondary" onclick="openCallbackModal()">
+                        <span class="btn-text">Заказать звонок специалиста</span>
+                        <span class="btn-icon">📞</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Прокрутите вниз</span>
+        </div>
+    </section>
+
+    <!-- Navigation Pills -->
+    <section class="nav-pills-section">
+        <div class="container">
+            <div class="nav-pills" data-aos="fade-up">
+                <button class="pill-btn active" data-target="about-services">
+                    <span class="pill-icon">⚖️</span>
+                    <span>Уникальные возможности</span>
+                </button>
+                <button class="pill-btn" data-target="instruments-section">
+                    <span class="pill-icon">🔧</span>
+                    <span>Перечень приборов</span>
+                </button>
+                <button class="pill-btn" data-target="workflow-section">
+                    <span class="pill-icon">🚚</span>
+                    <span>Как мы работаем</span>
+                </button>
+                <button class="pill-btn" data-target="advantages-section">
+                    <span class="pill-icon">⭐</span>
+                    <span>Почему выбирают нас</span>
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Services Section -->
+    <section class="about-services-section" id="about-services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrapper">
+                    <div class="section-icon animate-scale">⚖️</div>
+                    <h2 class="section-title">Уникальные возможности</h2>
+                </div>
+            </div>
+
+            <div class="unique-capabilities" data-aos="fade-up" data-aos-delay="200">
+                <div class="capability-content">
+                    <p>Наша компания предлагает уникальный для рынка комплекс услуг: мы не только проводим все виды поверки и калибровки средств измерений, но и выполняем их полноценный ремонт и восстановление в собственном сертифицированном сервисном центре. Вы получаете единого ответственного исполнителя, что гарантирует оперативность, качество и реальную экономию ваших средств и времени.</p>
+                </div>
+            </div>
+
+            <!-- Geography Section -->
+            <div class="geography-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="section-title-wrapper">
+                    <div class="section-icon animate-spin">🚚</div>
+                    <h3 class="section-title">География работы</h3>
+                </div>
+
+                <div class="geography-content">
+                    <div class="coverage-zone">
+                        <div class="zone-header">
+                            <div class="zone-icon">📍</div>
+                            <h4>Основная зона покрытия с регулярными курьерскими рейсами:</h4>
+                        </div>
+                        <div class="cities-grid">
+                            <div class="city-item">
+                                <span class="city-emoji">🏢</span>
+                                <span>Москва и Московская область</span>
+                            </div>
+                            <div class="city-item">
+                                <span class="city-emoji">🏛️</span>
+                                <span>Владимир</span>
+                            </div>
+                            <div class="city-item">
+                                <span class="city-emoji">🏭</span>
+                                <span>Нижний Новгород</span>
+                            </div>
+                            <div class="city-item">
+                                <span class="city-emoji">🌉</span>
+                                <span>Чебоксары</span>
+                            </div>
+                            <div class="city-item">
+                                <span class="city-emoji">🕌</span>
+                                <span>Казань</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔧</div>
+                            <h4>Сертифицированный сервисный центр</h4>
+                            <p>Для ремонта и восстановления приборов</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h4>Оперативность</h4>
+                            <p>За счет отсутствия посредников</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📋</div>
+                            <h4>Официальная гарантия</h4>
+                            <p>На все виды работ</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚚</div>
+                            <h4>Выездные работы</h4>
+                            <p>С помощью передвижной лаборатории</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instruments Section -->
+    <section class="instruments-section" id="instruments-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrapper">
+                    <div class="section-icon animate-list">🔧</div>
+                    <h2 class="section-title">Перечень приборов</h2>
+                </div>
+            </div>
+
+            <div class="instruments-grid" data-aos="fade-up" data-aos-delay="200">
+                <div class="instrument-card">
+                    <div class="instrument-icon">🌡️</div>
+                    <div class="instrument-content">
+                        <h3>Теплосчетчики и тепловычислители</h3>
+                        <p>Учет тепловой энергии. Ремонт плат, дисплеев, замена элементов питания</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">🌊</div>
+                    <div class="instrument-content">
+                        <h3>Расходомеры (все типы)</h3>
+                        <p>Измерение объема/массы жидкости или газа. Чистка, калибровка, замена датчиков</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">💧</div>
+                    <div class="instrument-content">
+                        <h3>Водосчетчики</h3>
+                        <p>Коммерческий учет воды. Ремонт крыльчатки, счетного механизма</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">🌡️</div>
+                    <div class="instrument-content">
+                        <h3>Термопреобразователи сопротивления</h3>
+                        <p>Измерение температуры в системах учета. Замена, калибровка, восстановление</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">📏</div>
+                    <div class="instrument-content">
+                        <h3>Манометры, датчики давления</h3>
+                        <p>Контроль давления в трубопроводах. Ремонт</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">💨</div>
+                    <div class="instrument-content">
+                        <h3>Газоанализаторы</h3>
+                        <p>Контроль загазованности. Поверка чувствительности, ремонт сенсоров</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">🌡️</div>
+                    <div class="instrument-content">
+                        <h3>Термометры биметаллические</h3>
+                        <p>Визуальный контроль температуры. Калибровка, восстановление шкалы</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">⚙️</div>
+                    <div class="instrument-content">
+                        <h3>ТРЭМ</h3>
+                        <p>Регулировка температуры. Настройка, ремонт контактных групп</p>
+                    </div>
+                </div>
+
+                <div class="instrument-card">
+                    <div class="instrument-icon">🚛</div>
+                    <div class="instrument-content">
+                        <h3>Поверка и градуировка автоцистерн и бензовозов</h3>
+                        <p>Учет нефтепродуктов. Поверка и ремонт на месте или в стационаре</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="workflow-section" id="workflow-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrapper">
+                    <div class="section-icon animate-truck">🚚</div>
+                    <h2 class="section-title">Как мы работаем?</h2>
+                </div>
+            </div>
+
+            <div class="workflow-timeline" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-icon">📞</div>
+                    <div class="timeline-content">
+                        <h3>Заявка</h3>
+                        <p>Через сайт или телефон</p>
+                    </div>
+                    <div class="timeline-number">1</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-icon">💰</div>
+                    <div class="timeline-content">
+                        <h3>Согласование</h3>
+                        <p>Обсуждение и утверждение цены работ</p>
+                    </div>
+                    <div class="timeline-number">2</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-icon">🚚</div>
+                    <div class="timeline-content">
+                        <h3>Выезд</h3>
+                        <p>Выезд бригады по демонтажу приборов либо курьера</p>
+                    </div>
+                    <div class="timeline-number">3</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-icon">🔬</div>
+                    <div class="timeline-content">
+                        <h3>Диагностика</h3>
+                        <p>В лаборатории</p>
+                    </div>
+                    <div class="timeline-number">4</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-icon">⚙️</div>
+                    <div class="timeline-content">
+                        <h3>Поверка</h3>
+                        <p>Поверки приборов учета</p>
+                    </div>
+                    <div class="timeline-number">5</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="600">
+                    <div class="timeline-icon">📋</div>
+                    <div class="timeline-content">
+                        <h3>Смета на ремонт</h3>
+                        <p>Если потребуется</p>
+                    </div>
+                    <div class="timeline-number">6</div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="700">
+                    <div class="timeline-icon">🔧</div>
+                    <div class="timeline-content">
+                        <h3>Монтаж</h3>
+                        <p>Приборов либо доставка и передача документов (свидетельства о поверке)</p>
+                    </div>
+                    <div class="timeline-number">7</div>
+                </div>
+            </div>
+
+            <!-- Special Offer -->
+            <div class="special-offer" data-aos="fade-up" data-aos-delay="700">
+                <div class="offer-icon">🎯</div>
+                <div class="offer-content">
+                    <h4>Уникальное предложение по поверке счетчиков автоцистерн:</h4>
+                    <p>Мы — одни из немногих в России, кто предоставляет полный цикл услуг для автоцистерн с учетом погодных условий:</p>
+                    <ul>
+                        <li>Выездная поверка на месте эксплуатации (по вашему адресу)</li>
+                        <li>Стационарная поверка в любое время года в нашем специализированном закрытом отапливаемом ангаре в г. Дзержинск (Нижегородская область)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages-section" id="advantages-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-title-wrapper">
+                    <div class="section-icon animate-check">⭐</div>
+                    <h2 class="section-title">Почему выбирают нас?</h2>
+                </div>
+            </div>
+
+            <div class="advantages-grid" data-aos="fade-up" data-aos-delay="200">
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">🎯</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">ВСЁ В ОДНОМ</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">«Все в одном»</h4>
+                        <p class="advantage-description">Поверка и ремонт у одного подрядчика</p>
+                    </div>
+                </div>
+
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">💰</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">ЭКОНОМИЯ</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">Восстановление</h4>
+                        <p class="advantage-description">Вместо замены — экономия до 70% бюджета</p>
+                    </div>
+                </div>
+
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">⚡</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">БЫСТРО</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">Скорость</h4>
+                        <p class="advantage-description">Работаем в 1,5-2 раза быстрее</p>
+                    </div>
+                </div>
+
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">🔍</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">ОТКРЫТО</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">Прозрачность</h4>
+                        <p class="advantage-description">Полный контроль на всех этапах</p>
+                    </div>
+                </div>
+
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">📄</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">ЛЕГАЛЬНО</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">Легальность</h4>
+                        <p class="advantage-description">Официальные документы для РСО</p>
+                    </div>
+                </div>
+
+                <div class="advantage-card" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="advantage-header">
+                        <div class="advantage-icon-wrapper">
+                            <div class="advantage-icon-circle">
+                                <span class="advantage-icon-emoji">🛒</span>
+                            </div>
+                        </div>
+                        <div class="advantage-tag">ПОДДЕРЖКА</div>
+                    </div>
+                    <div class="advantage-content">
+                        <h4 class="advantage-title">Поддержка</h4>
+                        <p class="advantage-description">В случае если прибор невозможно восстановить поможем с приобретением</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Gallery Section -->
+    <section class="works-gallery-modern" data-aos="fade-up" data-aos-delay="200">
+        <div class="gallery-header">
+            <h2 class="gallery-title">Живые фотографии с объектов</h2>
+            <p class="gallery-subtitle">Работа наших специалистов</p>
+        </div>
+        
+        <div class="interactive-gallery">
+            <div class="gallery-container">
+                <div class="gallery-slider" id="verificationGallerySlider">
+                    {% if photos.verification_gallery_1 %}
+                        <div class="gallery-slide active">
+                            <img src="{{ photos.verification_gallery_1.image.url }}" alt="{{ photos.verification_gallery_1.alt_text|default:'Работа 1' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_2 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_2.image.url }}" alt="{{ photos.verification_gallery_2.alt_text|default:'Работа 2' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_3 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_3.image.url }}" alt="{{ photos.verification_gallery_3.alt_text|default:'Работа 3' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_4 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_4.image.url }}" alt="{{ photos.verification_gallery_4.alt_text|default:'Работа 4' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_5 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_5.image.url }}" alt="{{ photos.verification_gallery_5.alt_text|default:'Работа 5' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_6 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_6.image.url }}" alt="{{ photos.verification_gallery_6.alt_text|default:'Работа 6' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_7 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_7.image.url }}" alt="{{ photos.verification_gallery_7.alt_text|default:'Работа 7' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_8 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_8.image.url }}" alt="{{ photos.verification_gallery_8.alt_text|default:'Работа 8' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_9 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_9.image.url }}" alt="{{ photos.verification_gallery_9.alt_text|default:'Работа 9' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_10 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_10.image.url }}" alt="{{ photos.verification_gallery_10.alt_text|default:'Работа 10' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_11 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_11.image.url }}" alt="{{ photos.verification_gallery_11.alt_text|default:'Работа 11' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_12 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_12.image.url }}" alt="{{ photos.verification_gallery_12.alt_text|default:'Работа 12' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_13 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_13.image.url }}" alt="{{ photos.verification_gallery_13.alt_text|default:'Работа 13' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_14 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_14.image.url }}" alt="{{ photos.verification_gallery_14.alt_text|default:'Работа 14' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    
+                    {% if photos.verification_gallery_15 %}
+                        <div class="gallery-slide">
+                            <img src="{{ photos.verification_gallery_15.image.url }}" alt="{{ photos.verification_gallery_15.alt_text|default:'Работа 15' }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="gallery-controls">
+                    <button class="gallery-btn gallery-prev" id="verificationGalleryPrev">
+                        <span class="btn-icon">←</span>
+                        <span class="btn-text">Назад</span>
+                    </button>
+                    <button class="gallery-btn gallery-next" id="verificationGalleryNext">
+                        <span class="btn-text">Вперед</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </div>
+                
+                <div class="gallery-indicators" id="verificationGalleryIndicators">
+                    <!-- Indicators will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section-modern">
+        <div class="cta-bg-pattern"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <div class="cta-header">
+                    <div class="cta-icon">🔥</div>
+                    <h3>Получите бесплатную консультацию метролога и рассчитайте стоимость работ прямо сейчас!</h3>
+                    <p>Наша миссия: обеспечивать точность измерений и надежную работу вашего оборудования, принимая на себя всю ответственность.</p>
+                </div>
+                
+                <div class="cta-actions">
+        <button class="btn-cta btn-cta-primary" onclick="openApplicationModal()">
+            <span class="btn-text">Оставить заявку</span>
+            <span class="btn-icon">📝</span>
+        </button>
+                    <button class="btn-cta btn-cta-secondary" onclick="openCallbackModal()">
+                        <span class="btn-text">Заказать звонок специалиста</span>
+                        <span class="btn-icon">📞</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Application Modal -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Оставить заявку</h3>
+            <span class="close" onclick="closeApplicationModal()">&times;</span>
+        </div>
+        <form id="applicationForm" class="modal-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="applicationName">ФИО *</label>
+                <input type="text" id="applicationName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="applicationPhone">Телефон *</label>
+                <input type="tel" id="applicationPhone" name="phone" required>
+            </div>
+            <input type="hidden" name="service_type" value="verification_service">
+            <button type="submit" class="submit-btn">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+
+<!-- Callback Modal -->
+<div id="callbackModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Заказать звонок специалиста</h3>
+            <span class="close" onclick="closeCallbackModal()">&times;</span>
+        </div>
+        <form id="callbackForm" class="modal-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="callbackName">ФИО *</label>
+                <input type="text" id="callbackName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="callbackPhone">Телефон *</label>
+                <input type="tel" id="callbackPhone" name="phone" required>
+            </div>
+            <input type="hidden" name="service_type" value="verification_service">
+            <button type="submit" class="submit-btn">Заказать звонок</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{% include 'website/partials/verification_styles.html' %}
+
+<style>
+.white-title {
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+    text-shadow: none !important;
+}
+
+.hero-title .white-title {
+    color: white !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: white !important;
+    background-clip: unset !important;
+}
+
+/* Убираем дублирующиеся полоски под заголовками */
+.section-title::after {
+    display: none !important;
+}
+
+.section-subtitle::after {
+    display: none !important;
+}
+
+/* Works Gallery Styles */
+.works-gallery-modern {
+    padding: 40px 0;
+    background: transparent;
+    position: relative;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gallery-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: #1e1a6b;
+    margin-bottom: 15px;
+}
+
+.gallery-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+}
+
+.interactive-gallery {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-container {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.gallery-slider {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+}
+
+.gallery-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.gallery-btn {
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.gallery-btn:hover {
+    background: rgba(34, 197, 94, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+}
+
+.gallery-btn .btn-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.gallery-btn .btn-text {
+    font-size: 0.9rem;
+}
+
+.gallery-indicators {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.gallery-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-indicator.active {
+    background: #1e1a6b;
+    transform: scale(1.2);
+}
+
+.gallery-indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive styles for gallery */
+@media (max-width: 768px) {
+    .gallery-slider {
+        height: 280px;
+    }
+    
+    .gallery-container {
+        border-radius: 15px;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+    
+    .gallery-controls {
+        padding: 0 5px !important;
+    }
+    
+    .gallery-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        min-width: 80px;
+    }
+    
+    .gallery-btn:active,
+    .gallery-btn:focus {
+        background: rgba(34, 197, 94, 0.9) !important;
+        color: white !important;
+    }
+    
+    .gallery-indicators {
+        bottom: 10px;
+    }
+    
+    .gallery-indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .gallery-header {
+        margin-top: 60px;
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-slider {
+        height: 280px;
+    }
+    
+    .gallery-container {
+        border-radius: 12px;
+        max-width: 95%;
+    }
+    
+    .gallery-controls {
+        padding: 0 5px !important;
+    }
+    
+    .gallery-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        min-width: 80px;
+    }
+    
+    .gallery-btn:active,
+    .gallery-btn:focus {
+        background: rgba(34, 197, 94, 0.9) !important;
+        color: white !important;
+    }
+    
+    .gallery-indicators {
+        bottom: 10px;
+    }
+    
+    .gallery-indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .works-gallery-modern {
+        padding: 20px 0 40px 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Дополнительные стили для кнопок галереи */
+.gallery-btn:active,
+.gallery-btn:focus,
+.gallery-btn:focus:active {
+    background: rgba(34, 197, 94, 0.9) !important;
+    color: white !important;
+    text-decoration: none !important;
+    transform: translateY(0) !important;
+}
+
+.gallery-btn:hover:active {
+    background: rgba(34, 197, 94, 1) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{% include 'website/partials/verification_scripts.html' %}
+{% endblock %}
